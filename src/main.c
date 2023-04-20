@@ -2,7 +2,7 @@
  *
  * \brief     Blinky
  * \file      main.c
- * \author    Hugo Arends
+ * \author    Hugo Arends  
  * \date      June 2021
  *
  * \copyright 2021 HAN University of Applied Sciences. All Rights Reserved.
