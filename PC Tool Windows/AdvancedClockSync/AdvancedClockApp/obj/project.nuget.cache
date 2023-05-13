@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "UM1OP1JUaP9+8VviQmdAxtejaeolnRLoOmTdicyjfb1thclVpmKSNKQaIl+NyGoIJoUCsM8H7rP98C/tZ3GSEw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\AdvancedClockApp\\AdvancedClockApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.native.system.io.ports\\7.0.0\\runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\system.io.ports\\7.0.0\\system.io.ports.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
