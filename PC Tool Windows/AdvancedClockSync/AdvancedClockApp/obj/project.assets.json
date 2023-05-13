@@ -231,11 +231,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj",
+      "projectUniqueName": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\AdvancedClockApp\\AdvancedClockApp.csproj",
       "projectName": "AdvancedClockApp",
-      "projectPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj",
+      "projectPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\AdvancedClockApp\\AdvancedClockApp.csproj",
       "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\obj\\",
+      "outputPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\AdvancedClockApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jeroe\\AppData\\Roaming\\NuGet\\NuGet.Config",

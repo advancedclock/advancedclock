@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8D6QU1Qofrrzw6+Jf5i9yicNr+XHnJuLbfTpIJDmESuhxLS908mrslJkuHPBkG1oo+uXV4mnzZK6pw+paQRfxw==",
+  "dgSpecHash": "UM1OP1JUaP9+8VviQmdAxtejaeolnRLoOmTdicyjfb1thclVpmKSNKQaIl+NyGoIJoUCsM8H7rP98C/tZ3GSEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj",
+  "projectFilePath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\AdvancedClockApp\\AdvancedClockApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jeroe\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
