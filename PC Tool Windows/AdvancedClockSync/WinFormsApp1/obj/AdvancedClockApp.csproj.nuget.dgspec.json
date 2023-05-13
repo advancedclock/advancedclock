@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\WinFormsApp1.csproj",
-        "projectName": "WinFormsApp1",
-        "projectPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj",
+        "projectName": "AdvancedClockApp",
+        "projectPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\AdvancedClockApp.csproj",
         "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\jeroe\\Documents\\HAN\\Advanced UC\\AdvancedClock\\advancedclock\\PC Tool Windows\\AdvancedClockSync\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
