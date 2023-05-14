@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'Advanced Clock' 
- * Target:  'blinky' 
+ * Target:  'Advanced clock' 
  */
 
 #ifndef RTE_COMPONENTS_H
