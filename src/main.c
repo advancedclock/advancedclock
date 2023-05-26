@@ -19,6 +19,9 @@
  *****************************************************************************/
 #include <MKL25Z4.h>
 #include <stdbool.h>
+#include <stdio.h>
+
+#include "uart0.h"
 
 // Local function prototypes
 static void delay_us(uint32_t d);
@@ -31,6 +34,9 @@ void rgb_onoff(const bool r, const bool g, const bool b);
 int main(void)
 {
     rgb_init();
+	//UART START
+	 uart0_init();    
+   uart0_send_string("Serial Lab\r\n");
 
     while(1)
     {

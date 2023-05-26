@@ -1,5 +1,7 @@
 --cpu Cortex-M0+
 ".\obj\main.o"
+".\obj\uart0.o"
+".\obj\queue.o"
 ".\obj\startup_mkl25z4.o"
 ".\obj\system_mkl25z4.o"
 --strict --scatter ".\obj\Advanced_clock.sct"
