@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc;.\queue;.\uart0</IncludePath>
+              <IncludePath>.\queue;.\uart0</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -418,6 +418,21 @@
               <FileName>queue.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\queue\queue.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Pc_comm</GroupName>
+          <Files>
+            <File>
+              <FileName>pc_comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pc_comm.c</FilePath>
+            </File>
+            <File>
+              <FileName>pc_comm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pc_comm.h</FilePath>
             </File>
           </Files>
         </Group>

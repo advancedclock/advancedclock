@@ -31,9 +31,9 @@
 #define SERVORIGHTNULL 860//920
 
 //3, 5, 6, 9, 10, 11
-#define SERVOPINLIFT  3//6//D3//2
-#define SERVOPINLEFT  6//9//D6//3
-#define SERVOPINRIGHT 5//8//D5//4
+#define SERVOPINLIFT  3//D3//2
+#define SERVOPINLEFT  6//D6//3
+#define SERVOPINRIGHT 5//D5//4
 
 // lift positions of lifting servo
 #define LIFT0 1080 // on drawing surface
@@ -68,7 +68,7 @@
 #include <DS1307RTC.h> // see http://playground.arduino.cc/Code/time    
 #endif
 
-int servoLift = 1500;
+int servoLift = LIFTSPEED;
 
 Servo servo1;  // 
 Servo servo2;  // 

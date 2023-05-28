@@ -33,14 +33,57 @@ void rgb_onoff(const bool r, const bool g, const bool b);
  */
 int main(void)
 {
-    rgb_init();
-	//UART START
+   rgb_init();
+	 //UART START
 	 uart0_init();    
-   uart0_send_string("Serial Lab\r\n");
+   uart0_send_string("Starting Advanced clock\r\n");
 
     while(1)
     {
-       //
+			uart0_send_string("Advanced clock alive\r\n");
+      delay_us(1000000);
+			
+			 // Check for incoming characters
+        if(uart0_num_rx_chars_available() > 0)
+        {
+            // Get the character
+            char c = uart0_get_char();
+            
+            // Turn on/off the RGB LED accordingly
+            switch(c)
+            {
+            case 'r':
+            case 'R':
+            {
+                rgb_onoff(true, false, false);
+            }
+            break;
+            case 'g':
+            case 'G':
+            {
+                rgb_onoff(false, true, false);
+            }
+            break;
+            case 'b':
+            case 'B':
+            {
+                rgb_onoff(false, false, true);
+            }
+            break;
+            case ' ':
+            {
+                rgb_onoff(false, false, false);
+            }
+            break;
+            default:
+            {
+                uart0_send_string("character: ");
+                uart0_put_char(c);
+                uart0_send_string("\r\n");
+            }
+            break;
+            }
+        }
     }
 }
 
