@@ -90,7 +90,7 @@ void SendTemperatureReference(int val)
 	
 void SendTimeSynqState(bool synqed)
 {
-	synqed ? uart0_send_string("SYNC:1|"):uart0_send_string("SYNC:0|");
+	synqed ? uart0_send_string("SYNC:1|\r\n"):uart0_send_string("SYNC:0|\r\n");
 }
 	
 void SendErrorMsg(char* val)
@@ -98,7 +98,7 @@ void SendErrorMsg(char* val)
 	char msg[80];
 	strcpy(msg, "ERROR:");
 	strcat(msg, val);
-	strcat(msg, "|");	
+	strcat(msg, "|\r\n");	
 
 	uart0_send_string(msg);
 }
@@ -116,6 +116,11 @@ void SendDebugMsg(char* str)
 signed int GetUnixTime(void)
 {
 	return UnixTime;
+}
+
+int GetReferenceTemperature(void)
+{
+	return RefTemp;
 }
 
 /***********************************************/

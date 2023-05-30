@@ -17,15 +17,19 @@
  *            
  *
  *****************************************************************************/
+ #define DEBUG
+ 
 #include <MKL25Z4.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-
 #include "servoControl.h"
 #include "pc_comm.h"
 
+
+//Debug function proto
 void echoUnixTime(void);
+void echoReferenceTemp(void);
 
 // Local function prototypes
 static void delay_us(uint32_t d);
@@ -59,7 +63,20 @@ int main(void)
 
       delay_us(1000000);
 			
+			
+			#ifdef DEBUG
 			echoUnixTime();
+			echoReferenceTemp();
+			
+			SendErrorMsg("test!");
+			SendTemperatureActual(25);
+			SendTemperatureReference(GetReferenceTemperature());
+			
+			if(GetUnixTime() > 0)
+				SendTimeSynqState(true);
+			else
+				SendTimeSynqState(false);
+			#endif
 			
 			
 			
@@ -68,21 +85,9 @@ int main(void)
 			moveServo? servoRightMove(4000):servoRightMove(6000);
 			moveServo? servoLiftMove(4000):servoLiftMove(6000);
 			moveServo =! moveServo;
-
-			
+		
 			 
     }
-}
-
-
-void echoUnixTime(void)
-{
-
-	char sVal[50];
-	sprintf(sVal, "UnixTime: %d\r\n", GetUnixTime());
-	
-	
-	SendDebugMsg(sVal);
 }
 	
 
@@ -188,3 +193,25 @@ inline void rgb_onoff(const bool r, const bool g, const bool b)
     TPM2->CONTROLS[1].CnV = g ? green : 0;
     TPM0->CONTROLS[1].CnV = b ? blue : 0;
 }
+
+
+/********************************************************/
+/*DEBUG FUNCTIONS																				*/
+/********************************************************/
+#ifdef DEBUG
+void echoUnixTime(void)
+{
+	char sVal[50];
+	sprintf(sVal, "UnixTime: %d\r\n", GetUnixTime());	
+	
+	SendDebugMsg(sVal);
+}
+
+void echoReferenceTemp(void)
+{
+	char sVal[50];
+	sprintf(sVal, "Ref temp: %d\r\n", GetReferenceTemperature());	
+	
+	SendDebugMsg(sVal);
+}
+#endif

@@ -39,6 +39,7 @@ void SendDebugMsg(char *);
 //GET
 void processCommData(void);
 signed int GetUnixTime(void);
+int GetReferenceTemperature(void);
 
 
 //PRIVATE
