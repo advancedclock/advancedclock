@@ -419,6 +419,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\clock.h</FilePath>
             </File>
+            <File>
+              <FileName>datetime.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\datetime.h</FilePath>
+            </File>
+            <File>
+              <FileName>datetime.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\datetime.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

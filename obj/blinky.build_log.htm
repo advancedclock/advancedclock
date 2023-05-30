@@ -27,16 +27,89 @@ Project File Date:  05/30/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'blinky'
+src/main.c(5): warning: In file included from...
+./src/clock.h(6): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+1 warning generated.
 compiling main.c...
 compiling led.c...
 compiling delay.c...
 assembling startup_MKL25Z4.s...
+src/datetime.c(34): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+src/datetime.c(78): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->hour = Seconds / SECONDS_IN_A_HOUR;
+                       ~ ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+src/datetime.c(82): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->minute = Seconds / SECONDS_IN_A_MIN;
+                         ~ ~~~~~~~~^~~~~~~~~~~~~~~~~~
+src/datetime.c(113): warning: implicit conversion loses integer precision: 'uint32_t' (aka 'unsigned int') to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+                        datetime->month = x;
+                                        ~ ^
+src/datetime.c(121): warning: implicit conversion loses integer precision: 'uint32_t' (aka 'unsigned int') to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->day = Days;
+                      ~ ^~~~
+src/datetime.c(34): warning: In file included from...
+./src/datetime.h(35): warning: padding size of 'datetime_t' with 1 byte to alignment boundary [-Wpadded]
+typedef struct
+        ^
+6 warnings generated.
+compiling datetime.c...
+src/clock.c(11): warning: In file included from...
+./src/clock.h(6): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+./src/datetime.h(35): warning: padding size of 'datetime_t' with 1 byte to alignment boundary [-Wpadded]
+typedef struct
+        ^
+src/clock.c(76): warning: declaration shadows a variable in the global scope [-Wshadow]
+void timeSyncCheck(uint32_t * unixTimeSeconds)
+                              ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(89): warning: declaration shadows a variable in the global scope [-Wshadow]
+char* getTimeAsString(uint32_t unixTimeSeconds)
+                               ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(96): warning: passing 'volatile datetime_t *' to parameter of type 'datetime_t *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+                RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+                                                                ^~~~~~~~~
+./src/datetime.h(45): note: passing argument to parameter 'datetime' here
+void RTC_HAL_ConvertSecsToDatetime(const uint32_t * seconds, datetime_t * datetime);
+                                                                          ^
+src/clock.c(107): warning: address of stack memory associated with local variable 'timeString' returned [-Wreturn-stack-address]
+                return timeString;
+                       ^~~~~~~~~~
+src/clock.c(110): warning: declaration shadows a variable in the global scope [-Wshadow]
+char* getDateAsString(uint32_t unixTimeSeconds)
+                               ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(117): warning: passing 'volatile datetime_t *' to parameter of type 'datetime_t *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+                RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+                                                                ^~~~~~~~~
+./src/datetime.h(45): note: passing argument to parameter 'datetime' here
+void RTC_HAL_ConvertSecsToDatetime(const uint32_t * seconds, datetime_t * datetime);
+                                                                          ^
+src/clock.c(128): warning: address of stack memory associated with local variable 'dateString' returned [-Wreturn-stack-address]
+                return dateString;
+                       ^~~~~~~~~~
+9 warnings generated.
 compiling clock.c...
 compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=1508 RO-data=224 RW-data=4 ZI-data=1132  
+Program Size: Code=1960 RO-data=224 RW-data=4 ZI-data=1132  
 FromELF: creating hex file...
-".\obj\blinky.axf" - 0 Error(s), 0 Warning(s).
+".\obj\blinky.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -64,8 +137,8 @@ Package Vendor: Keil
 
    * Component: Keil::Device:Startup:2.5.0
       Source file:   Device/Source/ARM/startup_MKL25Z4.s
-      Source file:   Device/Source/system_MKL25Z4.c
       Include file:  Device/Source/system_MKL25Z4.h
+      Source file:   Device/Source/system_MKL25Z4.c
 Build Time Elapsed:  00:00:01
 </pre>
 </body>
