@@ -11,7 +11,7 @@
  * - Blue: PTD1
  */
 
-inline void rgb_onoff(const bool r, const bool g, const bool b)
+inline void setLEDStatus(const bool r, const bool g, const bool b)
 {
     // Set convenient on/off values for each color here, ranging from
     // 0 to 65535. A lower value means that the LED will be lit more dim.
@@ -19,9 +19,9 @@ inline void rgb_onoff(const bool r, const bool g, const bool b)
     // DO NOT SET THIS NUMBER HIGHER THAN 4096, BECAUSE THE LEDS ARE VERY
     // BRIGHT!
     //
-    const uint16_t red = 2048;
-    const uint16_t green = 2048;
-    const uint16_t blue = 2048;
+    const uint16_t red = 512;
+    const uint16_t green = 512;
+    const uint16_t blue = 512;
 
     // Set the channel compare values
     TPM2->CONTROLS[0].CnV = r ? red : 0;
@@ -54,7 +54,7 @@ void rgb_init(void)
     PORTD->PCR[1]  = PORT_PCR_MUX(4);
 
     // Set initial values: all LEDs off
-    rgb_onoff(false, false, false);
+    setLEDStatus(false, false, false);
 
     // Set modulo value. We use the full 16-bit range, which allows us to
     // control each RGB LED in 2^16 = 65536 steps.

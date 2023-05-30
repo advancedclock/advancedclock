@@ -1,10 +1,6 @@
 #include <MKL25Z4.h>
 #include "delay.h"
 
-// Troubleshooting
-#include <stdbool.h>
-#include <stdio.h>
-
 void delay_us(uint32_t d)
 {
 

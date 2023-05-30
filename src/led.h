@@ -4,7 +4,7 @@
 #include <MKL25Z4.h>
 #include <stdbool.h>
 
-void rgb_onoff(const bool r, const bool g, const bool b);
+void setLEDStatus(const bool r, const bool g, const bool b);
 void rgb_init(void);
 
 #endif

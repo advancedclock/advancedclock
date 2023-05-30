@@ -2,20 +2,38 @@
 #include <stdbool.h>
 #include "led.h"
 #include "delay.h"
+#include "clock.h"
 
 int main(void)
 {
     rgb_init();
+		PITInit();
 
     while(1)
     {
-        rgb_onoff(true, false, false);
-        delay_us(1000000UL);
-        rgb_onoff(false, true, false);
-        delay_us(1000000UL);
-        rgb_onoff(false, false, true);
-        delay_us(1000000UL);
-        rgb_onoff(false, false, false);
-        delay_us(1000000UL);
+				// RED
+        //setLEDStatus(true, false, false);
+				
+				// GREEN
+        //setLEDStatus(false, true, false);
+				
+				// BLUE
+        //setLEDStatus(false, false, true);
+			
+			
+//				// Loop through colors
+//				setLEDStatus(true, false, false);
+//        delay_us(1000000UL);
+//        setLEDStatus(false, true, false);
+//        delay_us(1000000UL);
+//        setLEDStatus(false, false, true);
+//        delay_us(1000000UL);
+//        setLEDStatus(false, false, false);
+//        delay_us(1000000UL);
+			
+			
+		// Enable clock for Port B
+    SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK;
+
     }
 }

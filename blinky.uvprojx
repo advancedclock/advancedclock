@@ -409,6 +409,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\delay.h</FilePath>
             </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\clock.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

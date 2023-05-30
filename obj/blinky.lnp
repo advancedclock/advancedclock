@@ -2,6 +2,7 @@
 ".\obj\main.o"
 ".\obj\led.o"
 ".\obj\delay.o"
+".\obj\clock.o"
 ".\obj\startup_mkl25z4.o"
 ".\obj\system_mkl25z4.o"
 --strict --scatter ".\obj\blinky.sct"
