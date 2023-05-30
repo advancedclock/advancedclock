@@ -21,71 +21,70 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "uart0.h"
+
+#include "servoControl.h"
+#include "pc_comm.h"
+
+void echoUnixTime(void);
 
 // Local function prototypes
 static void delay_us(uint32_t d);
 void rgb_init(void);
 void rgb_onoff(const bool r, const bool g, const bool b);
+static bool moveServo = false;
 
 /*!
  * \brief Main application
  */
 int main(void)
 {
-   rgb_init();
+    rgb_init();
+		rgb_onoff(true, true, true);
+		delay_us(500000);
+		rgb_onoff(false, false, false);
+	
+	
 	 //UART START
-	 uart0_init();    
-   uart0_send_string("Starting Advanced clock\r\n");
+	 //uart0_init();  
+		pc_comm_init();  
+		
+	
+		//SERVOS
+		servos_init();
 
     while(1)
     {
-			uart0_send_string("Advanced clock alive\r\n");
+			SendDebugMsg("Advanced clock alive\r\n");
+			processCommData();
+
       delay_us(1000000);
 			
-			 // Check for incoming characters
-        if(uart0_num_rx_chars_available() > 0)
-        {
-            // Get the character
-            char c = uart0_get_char();
-            
-            // Turn on/off the RGB LED accordingly
-            switch(c)
-            {
-            case 'r':
-            case 'R':
-            {
-                rgb_onoff(true, false, false);
-            }
-            break;
-            case 'g':
-            case 'G':
-            {
-                rgb_onoff(false, true, false);
-            }
-            break;
-            case 'b':
-            case 'B':
-            {
-                rgb_onoff(false, false, true);
-            }
-            break;
-            case ' ':
-            {
-                rgb_onoff(false, false, false);
-            }
-            break;
-            default:
-            {
-                uart0_send_string("character: ");
-                uart0_put_char(c);
-                uart0_send_string("\r\n");
-            }
-            break;
-            }
-        }
+			echoUnixTime();
+			
+			
+			
+			//Toggle servo position
+			moveServo? servoLeftMove(4000):servoLeftMove(6000);			
+			moveServo? servoRightMove(4000):servoRightMove(6000);
+			moveServo? servoLiftMove(4000):servoLiftMove(6000);
+			moveServo =! moveServo;
+
+			
+			 
     }
 }
+
+
+void echoUnixTime(void)
+{
+
+	char sVal[50];
+	sprintf(sVal, "UnixTime: %d\r\n", GetUnixTime());
+	
+	
+	SendDebugMsg(sVal);
+}
+	
 
 /*!
  * \brief Creates a blocking delay

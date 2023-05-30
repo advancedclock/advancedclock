@@ -317,7 +317,7 @@
             <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>1</OneElfS>
+            <OneElfS>0</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\queue;.\uart0</IncludePath>
+              <IncludePath>./inc;.\queue;.\uart0;.\servos;.\pc_comm</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -427,12 +427,32 @@
             <File>
               <FileName>pc_comm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\pc_comm.c</FilePath>
+              <FilePath>.\pc_comm\pc_comm.c</FilePath>
             </File>
             <File>
               <FileName>pc_comm.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\pc_comm.h</FilePath>
+              <FilePath>.\pc_comm\pc_comm.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Servos</GroupName>
+          <Files>
+            <File>
+              <FileName>servoControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\servos\servoControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>servoControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\servos\servoControl.h</FilePath>
+            </File>
+            <File>
+              <FileName>ServoConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\servos\ServoConfig.h</FilePath>
             </File>
           </Files>
         </Group>
