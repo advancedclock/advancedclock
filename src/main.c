@@ -7,7 +7,9 @@
 int main(void)
 {
     rgb_init();
-		PITInit();
+	
+		// Give PITInit a frequency in Hz for IRQ
+		PITInit(10);
 
     while(1)
     {
@@ -33,7 +35,7 @@ int main(void)
 			
 			
 		// Enable clock for Port B
-    SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK;
+    //SIM->SCGC5 |= SIM_SCGC5_PORTB_MASK;
 
     }
 }

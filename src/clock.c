@@ -11,7 +11,9 @@
 
 #define RECENTUNIXTIME 1685449404		// Unix tijd voor 2023-05-30 12:23:24 (UTC)
 
-void PITInit()
+
+
+void PITInit(uint32_t PITfrequency)
 {
     // Enable clock for PIT module
     SIM->SCGC6 |= SIM_SCGC6_PIT_MASK;
@@ -20,7 +22,7 @@ void PITInit()
     PIT->MCR = PIT_MCR_FRZ_MASK;
 
     // Set the desired timer period
-	  PIT->CHANNEL[0].LDVAL = (SystemCoreClock - 1);
+	  PIT->CHANNEL[0].LDVAL = ((SystemCoreClock / PITfrequency) - 1);
 
     // Enable interrupts for the PIT channel 0
     PIT->CHANNEL[0].TCTRL |= PIT_TCTRL_TIE_MASK;
@@ -50,14 +52,13 @@ void PIT_IRQHandler(void) {
 		{
 				// Blue light
 				setLEDStatus(false, false, true);
-			
-				// Blocking delay of 1 second
-				delay_us(1000000UL);
-			
+    }
+		
+		if (count == 2)
+		{
 				// Green light
 				setLEDStatus(false, true, false);
-			
-				// Reset counter
 				count = 0;
-    }
+		}
+		
 }

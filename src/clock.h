@@ -4,9 +4,7 @@
 #include <MKL25Z4.h>
 #include <stdbool.h>
 
-extern volatile bool updateFlag;
-
 // prototype here
-void PITInit();
+void PITInit(uint32_t PITfrequency);
 
 #endif
