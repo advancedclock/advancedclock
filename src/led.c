@@ -1,5 +1,5 @@
 #include <MKL25Z4.h>
-#include <stdbool.h>
+#include "led.h"
 
 /*!
  * \brief Initialises the onboard RGB LED
