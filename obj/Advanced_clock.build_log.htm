@@ -27,7 +27,19 @@ Project File Date:  05/30/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Advanced clock'
-".\obj\Advanced_clock.axf" - 0 Error(s), 0 Warning(s).
+compiling servoControl.c...
+src/main.c(27): warning: In file included from...
+./pc_comm\pc_comm.h(46): warning: unused function 'getValue' [-Wunused-function]
+static void getValue(const char* , char* );
+            ^
+./pc_comm\pc_comm.h(47): warning: unused function 'getCommand' [-Wunused-function]
+static void getCommand(const char* , char* );
+            ^
+2 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=4870 RO-data=534 RW-data=4 ZI-data=2188  
+".\obj\Advanced_clock.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,7 +69,7 @@ Package Vendor: Keil
       Include file:  Device/Source/system_MKL25Z4.h
       Source file:   Device/Source/system_MKL25Z4.c
       Source file:   Device/Source/ARM/startup_MKL25Z4.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

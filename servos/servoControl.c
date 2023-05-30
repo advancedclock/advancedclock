@@ -19,8 +19,8 @@
 #define SERVO_LIFT 3 							  	// PTC3 
 #define SERVO_LIFT_CHN 2						 	// PTC3 = TPM0_CH2
 
+
 #include "servoControl.h"
-//#include "ServoConfig.h" //Later toevoegen?
 
 /*!
  * \brief Initialises Timer/PWM Module 1 (SERVO)
@@ -74,6 +74,6 @@ void servoLiftMove(int val) // werkt niet
 }
 
 
-/*test*/
+
 
 
