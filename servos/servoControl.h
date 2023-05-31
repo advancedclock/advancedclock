@@ -15,12 +15,17 @@
 
 
 void servos_init(void);
+void loop(void);
+void servoLeftMove(double);
+void servoRightMove(double);
+void servoLiftMove(double);
 
-void servoLeftMove(int);
 
-void servoRightMove(int);
 
-void servoLiftMove(int);
+/*test functions*/
+void setTime(int hour, int minute);
+int hour(void);
+int minute(void);
 
 
 

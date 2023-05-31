@@ -54,36 +54,41 @@ int main(void)
 	
 		//SERVOS
 		servos_init();
+		
 
     while(1)
     {
-			SendDebugMsg("Advanced clock alive\r\n");
+			#ifdef DEBUG
+				//SendDebugMsg("Advanced clock alive\r\n");
+			#endif
+						
 			processCommData();
-
-      delay_us(1000000);
+      //delay_us(1000000);
+			
+			loop();
 			
 			
 			#ifdef DEBUG
-			echoUnixTime();
-			echoReferenceTemp();
-			
-			SendErrorMsg("test!");
-			SendTemperatureActual(25);
-			SendTemperatureReference(GetReferenceTemperature());
-			
-			if(GetUnixTime() > 0)
-				SendTimeSynqState(true);
-			else
-				SendTimeSynqState(false);
+				/*echoUnixTime();
+				echoReferenceTemp();
+				
+				SendErrorMsg("test!");
+				SendTemperatureActual(25);
+				SendTemperatureReference(GetReferenceTemperature());
+				
+				if(GetUnixTime() > 0)
+					SendTimeSynqState(true);
+				else
+					SendTimeSynqState(false);*/
 			#endif
 			
 			
 			
 			//Toggle servo position
-			moveServo? servoLeftMove(4000):servoLeftMove(6000);			
+			/*moveServo? servoLeftMove(4000):servoLeftMove(6000);			
 			moveServo? servoRightMove(4000):servoRightMove(6000);
 			moveServo? servoLiftMove(4000):servoLiftMove(6000);
-			moveServo =! moveServo;
+			moveServo =! moveServo;*/
 		
 			 
     }

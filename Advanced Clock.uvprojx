@@ -323,7 +323,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc;.\queue;.\uart0;.\servos;.\pc_comm</IncludePath>
+              <IncludePath>./inc;.\queue;.\uart0;.\servos;.\pc_comm;.\libs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -455,6 +455,9 @@
               <FilePath>.\servos\ServoConfig.h</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Librarys</GroupName>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
