@@ -17,7 +17,8 @@
  *            
  *
  *****************************************************************************/
- #define DEBUG
+
+#define DEBUG
  
 #include <MKL25Z4.h>
 #include <stdbool.h>
@@ -98,40 +99,6 @@ int main(void)
 			 
     }
 }
-	
-
-/*!
- * \brief Creates a blocking delay
- *
- * Software delay of approximately 1.02 us, depending on compiler version,
- * CPU clock frequency and optimizations.
- * - C compiler: ARMClang v6
- * - Language C: gnu11
- * - CPU clock: 48 MHz
- * - Optimization level: -O3
- * - Link-Time Optimization: disabled
- *
- * \param[in]  d  delay in microseconds
- */
-static void delay_us(uint32_t d)
-{
-
-#if (CLOCK_SETUP != 1)
-#warning This delay function does not work as designed
-#endif
-
-    volatile uint32_t t;
-
-    for(t=4*d; t>0; t--)
-    {
-        __asm("nop");
-        __asm("nop");
-    }
-}
-
-
-
-
 
 /********************************************************/
 /*DEBUG FUNCTIONS																				*/
