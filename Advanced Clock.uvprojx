@@ -317,13 +317,13 @@
             <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>1</OneElfS>
+            <OneElfS>0</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src</IncludePath>
+              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -432,6 +432,74 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>UART</GroupName>
+          <Files>
+            <File>
+              <FileName>uart0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\uart0\uart0.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\uart0\uart0.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Queue</GroupName>
+          <Files>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\queue\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\queue\queue.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Pc_comm</GroupName>
+          <Files>
+            <File>
+              <FileName>pc_comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pc_comm\pc_comm.c</FilePath>
+            </File>
+            <File>
+              <FileName>pc_comm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pc_comm\pc_comm.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Servos</GroupName>
+          <Files>
+            <File>
+              <FileName>servoControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\servos\servoControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>servoControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\servos\servoControl.h</FilePath>
+            </File>
+            <File>
+              <FileName>ServoConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\servos\ServoConfig.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Librarys</GroupName>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
@@ -488,7 +556,7 @@
   <LayerInfo>
     <Layers>
       <Layer>
-        <LayName>blinky</LayName>
+        <LayName>Advanced Clock</LayName>
         <LayPrjMark>1</LayPrjMark>
       </Layer>
     </Layers>

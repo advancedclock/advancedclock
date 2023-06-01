@@ -137,6 +137,8 @@ namespace WinFormsApp1
                     _serialPort.WriteLine(data);
                     tbDebugTx.AppendText(data);
                     tbDebugTx.AppendText(Environment.NewLine);
+                    tbDebugTx.SelectionStart = tbDebugTx.Text.Length;
+                    tbDebugTx.ScrollToCaret();
                 }
             }
             catch (Exception err)
@@ -301,7 +303,8 @@ namespace WinFormsApp1
         {
             tbDebugRx.Invoke((MethodInvoker)delegate
             {
-                tbDebugRx.Text = tbDebugRx.Text + '\n' + txt;
+                //tbDebugRx.Text = tbDebugRx.Text + '\n' + txt;
+                tbDebugRx.AppendText(txt);
             });
         }
 
@@ -311,6 +314,21 @@ namespace WinFormsApp1
             { 
                 _serialPort.Dispose();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            comPortSendData("r");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            comPortSendData("g");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            comPortSendData("b");
         }
     }
 }
