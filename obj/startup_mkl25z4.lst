@@ -608,12 +608,12 @@ ARM Macro Assembler    Page 10
               00000000 
 Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M0+ --dep
 end=.\obj\startup_mkl25z4.d -o.\obj\startup_mkl25z4.o -I.\RTE\Device\MKL25Z128x
-xx4 -I.\RTE\_blinky -IC:\Users\jaapjan\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\
-CMSIS\Core\Include -IC:\Users\jaapjan\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx
-_DFP\1.15.0\Device\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_V
-ERSION SETA 538" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA 1" 
---predefine="_RTE_ SETA 1" --list=.\obj\startup_mkl25z4.lst RTE/Device/MKL25Z12
-8xxx4/startup_MKL25Z4.s
+xx4 -I.\RTE\_Advanced_clock -IC:\Users\koend\AppData\Local\Arm\Packs\ARM\CMSIS\
+5.9.0\CMSIS\Core\Include -IC:\Users\koend\AppData\Local\Arm\Packs\Keil\Kinetis_
+KLxx_DFP\1.15.0\Device\Include --predefine="__EVAL SETA 1" --predefine="__UVISI
+ON_VERSION SETA 538" --predefine="_RTE_ SETA 1" --predefine="MKL25Z128xxx4 SETA
+ 1" --predefine="_RTE_ SETA 1" --list=.\obj\startup_mkl25z4.lst RTE/Device/MKL2
+5Z128xxx4/startup_MKL25Z4.s
 
 
 
