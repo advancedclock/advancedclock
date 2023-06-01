@@ -25,7 +25,9 @@
 
 #include "servoControl.h"
 #include "pc_comm.h"
-
+#include "led.h"
+#include "delay.h"
+#include "clock.h"
 
 //Debug function proto
 void echoUnixTime(void);
@@ -42,8 +44,6 @@ static bool moveServo = false;
  */
 int main(void)
 {
-		//RGB
-   // rgb_init();
 		//rgb_onoff(true, true, true);
 		delay_us(500000);
 		//rgb_onoff(false, false, false);
@@ -55,6 +55,11 @@ int main(void)
 		//SERVOS
 		servos_init();
 		
+		// init RGB LED
+		rgb_init();
+	
+		// Give PITInit a frequency in Hz for IRQ
+		PITInit(10);
 
     while(1)
     {

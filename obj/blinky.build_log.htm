@@ -1,0 +1,145 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ÂµVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: JJ Groenendijk, HAN, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DARMCM1.DLL V1.19.6.0
+Target DLL:      CMSIS_AGDI.dll V1.33.15.0
+Dialog DLL:      TARMCM1.DLL V1.14.6.0
+ 
+<h2>Project:</h2>
+C:\projects\advancedclock\blinky.uvprojx
+Project File Date:  05/30/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'blinky'
+src/main.c(5): warning: In file included from...
+./src/clock.h(6): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+1 warning generated.
+compiling main.c...
+compiling led.c...
+compiling delay.c...
+assembling startup_MKL25Z4.s...
+src/datetime.c(34): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+src/datetime.c(78): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->hour = Seconds / SECONDS_IN_A_HOUR;
+                       ~ ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+src/datetime.c(82): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->minute = Seconds / SECONDS_IN_A_MIN;
+                         ~ ~~~~~~~~^~~~~~~~~~~~~~~~~~
+src/datetime.c(113): warning: implicit conversion loses integer precision: 'uint32_t' (aka 'unsigned int') to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+                        datetime->month = x;
+                                        ~ ^
+src/datetime.c(121): warning: implicit conversion loses integer precision: 'uint32_t' (aka 'unsigned int') to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        datetime->day = Days;
+                      ~ ^~~~
+src/datetime.c(34): warning: In file included from...
+./src/datetime.h(35): warning: padding size of 'datetime_t' with 1 byte to alignment boundary [-Wpadded]
+typedef struct
+        ^
+6 warnings generated.
+compiling datetime.c...
+src/clock.c(11): warning: In file included from...
+./src/clock.h(6): warning: In file included from...
+./src/datetime.h(51): warning: no newline at end of file [-Wnewline-eof]
+******************************************************************************/
+                                                                               ^
+./src/datetime.h(35): warning: padding size of 'datetime_t' with 1 byte to alignment boundary [-Wpadded]
+typedef struct
+        ^
+src/clock.c(76): warning: declaration shadows a variable in the global scope [-Wshadow]
+void timeSyncCheck(uint32_t * unixTimeSeconds)
+                              ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(89): warning: declaration shadows a variable in the global scope [-Wshadow]
+char* getTimeAsString(uint32_t unixTimeSeconds)
+                               ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(96): warning: passing 'volatile datetime_t *' to parameter of type 'datetime_t *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+                RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+                                                                ^~~~~~~~~
+./src/datetime.h(45): note: passing argument to parameter 'datetime' here
+void RTC_HAL_ConvertSecsToDatetime(const uint32_t * seconds, datetime_t * datetime);
+                                                                          ^
+src/clock.c(107): warning: address of stack memory associated with local variable 'timeString' returned [-Wreturn-stack-address]
+                return timeString;
+                       ^~~~~~~~~~
+src/clock.c(110): warning: declaration shadows a variable in the global scope [-Wshadow]
+char* getDateAsString(uint32_t unixTimeSeconds)
+                               ^
+src/clock.c(17): note: previous declaration is here
+volatile uint32_t unixTimeSeconds = 0;
+                  ^
+src/clock.c(117): warning: passing 'volatile datetime_t *' to parameter of type 'datetime_t *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+                RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+                                                                ^~~~~~~~~
+./src/datetime.h(45): note: passing argument to parameter 'datetime' here
+void RTC_HAL_ConvertSecsToDatetime(const uint32_t * seconds, datetime_t * datetime);
+                                                                          ^
+src/clock.c(128): warning: address of stack memory associated with local variable 'dateString' returned [-Wreturn-stack-address]
+                return dateString;
+                       ^~~~~~~~~~
+9 warnings generated.
+compiling clock.c...
+compiling system_MKL25Z4.c...
+linking...
+Program Size: Code=1960 RO-data=224 RW-data=4 ZI-data=1132  
+FromELF: creating hex file...
+".\obj\blinky.axf" - 0 Error(s), 16 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.Kinetis_KLxx_DFP.1.15.0.pack
+                Keil.Kinetis_KLxx_DFP.1.15.0
+                NXP Kinetis KLxx Series Device Support and Examples
+   * Component: Startup Version: 2.5.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/MKL25Z128xxx4
+  ./RTE/_blinky
+  C:/Users/jaapjan/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/jaapjan/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:2.5.0
+      Source file:   Device/Source/ARM/startup_MKL25Z4.s
+      Include file:  Device/Source/system_MKL25Z4.h
+      Source file:   Device/Source/system_MKL25Z4.c
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
