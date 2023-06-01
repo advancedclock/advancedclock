@@ -27,7 +27,7 @@
 /*Define servo config 												  										*/
 /********************************************************************/
 // delete or mark the next line as comment if you don't need these
-#define CALIBRATION      // enable calibration mode
+//#define CALIBRATION      // enable calibration mode
 //#define REALTIMECLOCK    // enable real time clock
 
 // When in calibration mode, adjust the following factor until the servos move exactly 90 degrees
@@ -46,9 +46,9 @@
 #define SERVOPINRIGHT 5//D5//4
 
 // lift positions of lifting servo
-#define LIFT0 1080 // on drawing surface
+#define LIFT0 1250 // on drawing surface
 #define LIFT1 925  // between numbers
-#define LIFT2 725  // going towards sweeper
+#define LIFT2 525  // going towards sweeper
 
 // speed of liftimg arm, higher is slower
 #define LIFTSPEED 1500
@@ -90,6 +90,7 @@ static int _minute = 0;
 /********************************************************************/
 /*Function prototyping																							*/
 /********************************************************************/
+static void setup(void);
 static void configServoHW(void);
 static void number(float bx, float by, int num, float scale);
 static void lift(char lift);
@@ -111,9 +112,10 @@ static void delayMicroseconds(uint32_t d);
 void servos_init(void)
 {
 	configServoHW();
+	setup();
 }
 
-void setup(void)
+static void setup(void)
 {
     setTime(19, 38);
 
@@ -133,7 +135,6 @@ void loop(void)
     delayMicroseconds(500*1000);
 
 #else 
-
 
     int i = 0;
     if (last_min != minute()) {
@@ -252,7 +253,7 @@ void number(float bx, float by, int num, float scale) {
 
     case 111:
 
-        lift(0);
+        lift(0);//0;
         drawTo(70, 46);
         drawTo(65, 43);
 
@@ -418,6 +419,8 @@ double return_angle(double a, double b, double c) {
 void set_XY(double Tx, double Ty)
 {
     //delay(1);
+	  delayMicroseconds(2000);//slow down writing
+	
     double dx, dy, c, a1, a2, Hx, Hy;
 
     // calculate triangle between pen, servoLeft and arm joint
@@ -447,6 +450,7 @@ void set_XY(double Tx, double Ty)
 
     servoRightMove(floor(((a1 - a2) * SERVOFAKTORRIGHT) + SERVORIGHTNULL));
 
+		
 }
 
 /********************************************************************************/
