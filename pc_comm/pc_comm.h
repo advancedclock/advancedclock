@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "datetime.h"
 
 #include "uart0.h"
 
@@ -40,6 +41,7 @@ void SendDebugMsg(char *);
 void processCommData(void);
 signed int GetUnixTime(void);
 int GetReferenceTemperature(void);
+void GetDateTime(datetime_t * datetime);
 
 
 //PRIVATE

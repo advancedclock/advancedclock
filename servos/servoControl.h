@@ -16,9 +16,8 @@
 
 void servos_init(void);
 void loop(void);
-void servoLeftMove(double);
-void servoRightMove(double);
-void servoLiftMove(double);
+void writeTime(int hour, int minute);
+
 
 
 

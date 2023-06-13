@@ -11,6 +11,8 @@
  *****************************************************************************/
 #include "pc_comm.h"
 
+datetime_t pcDateTime;
+
 
 void pc_comm_init(void)
 {
@@ -38,6 +40,7 @@ void processCommData(void)
 
 		if (strcmp(cmd, "UNIX") == 0) {
 			UnixTime = atoi(val);
+			RTC_HAL_ConvertSecsToDatetime(&UnixTime, &pcDateTime);
 		} 
 		else if (strcmp(cmd, "REF_TEMP") == 0) {
 			RefTemp = atoi(val);
@@ -117,6 +120,17 @@ signed int GetUnixTime(void)
 {
 	return UnixTime;
 }
+
+void GetDateTime(datetime_t * datetime)
+{
+	datetime->year = pcDateTime.year;
+	datetime->month = pcDateTime.month;
+	datetime->day = pcDateTime.day;
+	datetime->hour = pcDateTime.hour;
+	datetime->minute = pcDateTime.minute;
+	datetime->second = pcDateTime.second;
+}
+
 
 int GetReferenceTemperature(void)
 {

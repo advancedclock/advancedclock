@@ -91,6 +91,9 @@ static int _minute = 0;
 /*Function prototyping																							*/
 /********************************************************************/
 static void setup(void);
+static void servoLeftMove(double);
+static void servoRightMove(double);
+static void servoLiftMove(double);
 static void configServoHW(void);
 static void number(float bx, float by, int num, float scale);
 static void lift(char lift);
@@ -117,7 +120,7 @@ void servos_init(void)
 
 static void setup(void)
 {
-    setTime(19, 38);
+    //setTime(19, 38);
 
     drawTo(75.2, 47);
     lift(0);
@@ -136,39 +139,46 @@ void loop(void)
 
 #else 
 
-    int i = 0;
-    if (last_min != minute()) {
-
-        lift(0);
-
-        hour();
-        while ((i + 1) * 10 <= hour())
-        {
-            i++;
-        }
-
-        number(3, 3, 111, 1);
-        number(5, 25, i, 0.9);
-        number(19, 25, (hour() - i * 10), 0.9);
-        number(28, 25, 11, 0.9);
-
-        i = 0;
-        while ((i + 1) * 10 <= minute())
-        {
-            i++;
-        }
-        number(34, 25, i, 0.9);
-        number(48, 25, (minute() - i * 10), 0.9);
-        lift(2);
-        drawTo(74.2, 47.5);
-        lift(1);
-        last_min = minute();
-
-    }
+    //int i = 0;
+   // if (last_min != minute()) 
+		//{			
+		//	writeTime(hour(),minute());
+    //}
 
 #endif
 
 }
+
+void writeTime(int hour, int minute)
+{
+	
+	  int i = 0;
+    lift(0);
+
+		while ((i + 1) * 10 <= hour)
+		{
+				i++;
+		}
+
+		number(3, 3, 111, 1);
+		number(5, 25, i, 0.9);
+		number(19, 25, (hour - i * 10), 0.9);
+		number(28, 25, 11, 0.9);
+
+		i = 0;
+		while ((i + 1) * 10 <= minute)
+		{
+				i++;
+		}
+		number(34, 25, i, 0.9);
+		number(48, 25, (minute - i * 10), 0.9);
+		lift(2);
+		drawTo(74.2, 47.5);
+		lift(1);
+		last_min = minute;
+
+}
+
 
 // Writing numeral with bx by being the bottom left originpoint. Scale 1 equals a 20 mm high font.
 // The structure follows this principle: move to first startpoint of the numeral, lift down, draw numeral, lift up

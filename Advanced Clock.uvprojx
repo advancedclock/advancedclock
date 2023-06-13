@@ -389,46 +389,6 @@
               <FileType>1</FileType>
               <FilePath>.\src\main.c</FilePath>
             </File>
-            <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\led.c</FilePath>
-            </File>
-            <File>
-              <FileName>led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\led.h</FilePath>
-            </File>
-            <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\clock.c</FilePath>
-            </File>
-            <File>
-              <FileName>clock.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\clock.h</FilePath>
-            </File>
-            <File>
-              <FileName>datetime.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\datetime.h</FilePath>
-            </File>
-            <File>
-              <FileName>datetime.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\datetime.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -498,6 +458,66 @@
         </Group>
         <Group>
           <GroupName>Librarys</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Datetime</GroupName>
+          <Files>
+            <File>
+              <FileName>datetime.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\datetime.c</FilePath>
+            </File>
+            <File>
+              <FileName>datetime.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\datetime.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Clock</GroupName>
+          <Files>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\clock.h</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\clock.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Delay</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\delay.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\delay.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ledcontrol</GroupName>
+          <Files>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\led.h</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\led.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

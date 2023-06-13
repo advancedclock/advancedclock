@@ -11,14 +11,15 @@
  *Jeroen
  *Koen
  *
- *             
- *            
- *            
- *            
- *
  *****************************************************************************/
 
 #define DEBUG
+
+#define INIT_SYSTEM 0
+#define PROCESS_PC_DATA 1
+#define UPDATE_DISPLAY 2
+#define WRITE_TIME 3
+
  
 #include <MKL25Z4.h>
 #include <stdbool.h>
@@ -35,47 +36,59 @@ void echoUnixTime(void);
 void echoReferenceTemp(void);
 
 // Local function prototypes
-static void delay_us(uint32_t d);
+void init(void);
+void delay_us(uint32_t d);
 void rgb_init(void);
 void rgb_onoff(const bool r, const bool g, const bool b);
 static bool moveServo = false;
+
+datetime_t dateTime;
+int prefMinute = 99;
+int function = 0;
 
 /*!
  * \brief Main application
  */
 int main(void)
 {
-		//rgb_onoff(true, true, true);
-		delay_us(500000);
-		//rgb_onoff(false, false, false);
-	
-		//PC_COMM
-		pc_comm_init();  
-		
-	
-		//SERVOS
-		servos_init();
-		
-		// init RGB LED
-		rgb_init();
-	
-		// Give PITInit a frequency in Hz for IRQ
-		PITInit(10);
-
     while(1)
-    {
+    {			
+			
+			switch(function)
+			{
+				case INIT_SYSTEM:
+				{
+					init();	
+					SendDebugMsg("System init complete\r\n");
+					function = PROCESS_PC_DATA;
+					break;
+				}
+				case PROCESS_PC_DATA:
+				{
+					processCommData();
+					function = WRITE_TIME;
+				}
+				case UPDATE_DISPLAY:
+				{
+					GetDateTime(&dateTime);
+					break;
+				}
+				case WRITE_TIME:
+				{
+					GetDateTime(&dateTime);
+					if(dateTime.minute != prefMinute)
+					{
+							prefMinute = dateTime.minute;
+							writeTime(dateTime.hour ,dateTime.minute);
+					}
+					function = PROCESS_PC_DATA;
+					break;
+				}
+			}
+			
+			
 			#ifdef DEBUG
-				//SendDebugMsg("Advanced clock alive\r\n");
-			#endif
-						
-			processCommData();
-      //delay_us(1000000);
-			
-			loop();
-			
-			
-			#ifdef DEBUG
-				/*echoUnixTime();
+				echoUnixTime();
 				echoReferenceTemp();
 				
 				SendErrorMsg("test!");
@@ -85,21 +98,26 @@ int main(void)
 				if(GetUnixTime() > 0)
 					SendTimeSynqState(true);
 				else
-					SendTimeSynqState(false);*/
+					SendTimeSynqState(false);
 			#endif
-			
-			
-			
-			//Toggle servo position
-			/*moveServo? servoLeftMove(4000):servoLeftMove(6000);			
-			moveServo? servoRightMove(4000):servoRightMove(6000);
-			moveServo? servoLiftMove(4000):servoLiftMove(6000);
-			moveServo =! moveServo;*/
-		
-			 
+			 delay_us(1000000); // 1 sec		
     }
 }
 
+void init(void)
+{
+		//PC_COMM
+		pc_comm_init();  	
+	
+		//SERVOS
+		servos_init();
+		
+		// init RGB LED
+		//rgb_init();
+	
+		// Give PITInit a frequency in Hz for IRQ
+		//PITInit(10);
+}
 /********************************************************/
 /*DEBUG FUNCTIONS																				*/
 /********************************************************/
