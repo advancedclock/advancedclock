@@ -265,12 +265,13 @@ namespace WinFormsApp1
 
             client.BaseAddress = new Uri("http://worldtimeapi.org/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("api/timezone/Etc/UTC").Result;
+            HttpResponseMessage response = client.GetAsync("api/timezone/Europe/Amsterdam").Result;
             if (response.IsSuccessStatusCode)
             {
                 var readFromJsonAsync = response.Content.ReadAsStringAsync().Result;
                 unixDt = JsonSerializer.Deserialize<UnixDt>(readFromJsonAsync);
-
+                unixDt.unixtime = unixDt.unixtime + unixDt.dst_offset + unixDt.raw_offset; //timezone
+                   
             }
             else
             {

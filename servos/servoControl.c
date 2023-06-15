@@ -4,10 +4,9 @@
  * \file      servoControl.c
  * \author    Jeroen Wijnands
  * \date      May 2023
- *
- * \copyright 
- *
- *\pins PTC1 (SERVO_LEFT), PTC2(RIGHT),	PTC3(LIFT)
+ * 
+ * \code based on https://github.com/9a/plotclock
+ * \pins PTC1 (SERVO_LEFT), PTC2(RIGHT),	PTC3(LIFT)
  *****************************************************************************/
  
 /********************************************************************/
@@ -28,7 +27,6 @@
 /********************************************************************/
 // delete or mark the next line as comment if you don't need these
 //#define CALIBRATION      // enable calibration mode
-//#define REALTIMECLOCK    // enable real time clock
 
 // When in calibration mode, adjust the following factor until the servos move exactly 90 degrees
 #define SERVOFAKTORLEFT 650//650
@@ -105,10 +103,7 @@ static void set_XY(double Tx, double Ty);
 static void delayMicroseconds(uint32_t d);
 
 
-/*!
- * \brief Initialises Timer/PWM Module 1 (SERVO)
- */
- 
+
 /********************************************************************/
 /*Functions							 																						*/
 /********************************************************************/
@@ -126,7 +121,7 @@ static void setup(void)
     lift(0);
 }
 
-void loop(void)
+void callibrate(void)
 {
 
 #ifdef CALIBRATION
@@ -136,14 +131,6 @@ void loop(void)
     delayMicroseconds(500*1000);
     drawTo(74.1, 28);
     delayMicroseconds(500*1000);
-
-#else 
-
-    //int i = 0;
-   // if (last_min != minute()) 
-		//{			
-		//	writeTime(hour(),minute());
-    //}
 
 #endif
 
@@ -528,19 +515,4 @@ void delayMicroseconds(uint32_t d)
 }
 
 
-/*test functions*/
-void setTime(int hour, int minute)
-{
-	_hour = hour;
-	_minute = minute;
-}
 
-int hour(void)
-{
-	return _hour;
-}
-	
-int minute(void)
-{
-	return _minute;
-}

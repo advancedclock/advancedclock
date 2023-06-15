@@ -15,17 +15,8 @@
 
 
 void servos_init(void);
-void loop(void);
+void callibrate(void);
 void writeTime(int hour, int minute);
-
-
-
-
-/*test functions*/
-void setTime(int hour, int minute);
-int hour(void);
-int minute(void);
-
 
 
 #endif // SERVO_CONTROL_H
