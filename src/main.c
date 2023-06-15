@@ -83,6 +83,13 @@ int main(void)
 				case PROCESS_PC_DATA:
 				{
 					processCommData();
+					
+					if (newUnixTimeAvailable())
+					{
+						//setTime(); todo
+						ProcessedNewUnixTime(true);
+						SendTimeSynqState(true);						
+					}
 					systemFunction = WRITE_TIME;
 				}				
 				case WRITE_TIME:
@@ -124,7 +131,11 @@ int main(void)
 					{
 						//setLEDStatus(false,true,false);//GREEN
 					}
-						
+					
+					//Communicatie with pc app					
+					SendTemperatureActual(temp);
+					SendTemperatureReference(GetReferenceTemperature());
+					
 					systemFunction = PROCESS_PC_DATA;
 					break;
 				}
@@ -135,7 +146,6 @@ int main(void)
 				echoUnixTime();
 				echoReferenceTemp();
 				
-				SendErrorMsg("test!");
 				SendTemperatureActual(25);
 				SendTemperatureReference(GetReferenceTemperature());
 				
@@ -170,8 +180,10 @@ bool showName(char* out_name)
 		int distance_cm = 1000;//irReadDistance();
 	
 		if(distance_cm = -1)
+		{
 				out_name = "IR ERROR!\0";
-
+				SendErrorMsg(out_name);
+		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
 				out_name = "Anthony\0";
 		

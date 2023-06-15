@@ -36,12 +36,14 @@ void SendTemperatureReference(int);
 void SendTimeSynqState(bool synqed);
 void SendErrorMsg(char *);
 void SendDebugMsg(char *);
+void ProcessedNewUnixTime(bool);
 
 //GET
 void processCommData(void);
 signed int GetUnixTime(void);
 int GetReferenceTemperature(void);
 void GetDateTime(datetime_t * datetime);
+bool newUnixTimeAvailable();
 
 
 //PRIVATE

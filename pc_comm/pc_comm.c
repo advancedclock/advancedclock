@@ -12,7 +12,7 @@
 #include "pc_comm.h"
 
 datetime_t pcDateTime;
-
+bool _newUnixTimeAvailable = false;
 
 void pc_comm_init(void)
 {
@@ -34,13 +34,14 @@ void processCommData(void)
 				 buff[i] = uart0_get_char();
 		}
 
-
 		getCommand(buff,cmd);
 		getValue(buff,val);
 
 		if (strcmp(cmd, "UNIX") == 0) {
 			UnixTime = atoi(val);
 			RTC_HAL_ConvertSecsToDatetime(&UnixTime, &pcDateTime);
+			_newUnixTimeAvailable = true;		
+			
 		} 
 		else if (strcmp(cmd, "REF_TEMP") == 0) {
 			RefTemp = atoi(val);
@@ -121,6 +122,17 @@ signed int GetUnixTime(void)
 	return UnixTime;
 }
 
+
+bool newUnixTimeAvailable()
+{	
+	return _newUnixTimeAvailable;
+}
+
+void ProcessedNewUnixTime(bool){
+	_newUnixTimeAvailable = false;
+	SendTimeSynqState(true);
+}
+	
 void GetDateTime(datetime_t * datetime)
 {
 	datetime->year = pcDateTime.year;
