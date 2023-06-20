@@ -56,7 +56,7 @@ void delay_us(uint32_t d);
 void rgb_init(void);
 void rgb_onoff(const bool r, const bool g, const bool b);
 static bool moveServo = false;
-static bool showName(char* out_name);
+static bool showName(char* out_first_name, char* out_last_name);
 
 /********************************************************************/
 /*Varianble definition	 																						*/
@@ -114,16 +114,17 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					char line1[16];
-					char line2[16];
+					char line1[16] = "12:34:56";
+					char line2[16] = "1 Mei 2023";
 					
-					if (!showName(line1))
+					if (!showName(line1,line2))
 					{
-							//getTimeAsString(line1);
-							//getDateAsString(line2);
-					}
+							//line1 = getTimeAsString(line1);
+							//line2 = getDateAsString(line2);
+					}		
+
+					lcd_printlines(line1,line2);				
 					
-					lcd_printlines("12:34:56","1 mei 2023");
 					
 					systemFunction = CHECK_SYSTEM_TEMPERATURE;
 					break;
@@ -186,28 +187,35 @@ void initSystem(void)
 }
 
 
-bool showName(char* out_name)
+bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
 		int distance_cm = 1000;//irReadDistance();
 	
 		if(distance_cm = -1)
 		{
-				out_name = "IR ERROR!\0";
-				SendErrorMsg(out_name);
+				SendErrorMsg("IR ERROR!\0");
 		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
-				out_name = "Anthony\0";
-		
+		{
+			out_first_name = "Anthony\0";
+			out_last_name = "vd Veght\0";
+		}
 		else if (distance_cm < DISTANCE_SECOND_NAME)
-				out_name = "Jaap-Jan\0";
-		
+		{		
+			out_first_name = "Jaap-Jan\0";
+			out_last_name = "Groenendijk\0";
+		}
 		else if (distance_cm < DISTANCE_THIRD_NAME)
-				out_name = "Jeroen\0";
-		
+		{		
+			out_first_name = "Jeroen\0";
+			out_last_name = "Wijnands\0";
+		}
 		else if (distance_cm < DISTANCE_FOURTH_NAME)
-				out_name = "Koen\0";
-		
+		{
+			out_first_name = "Koen\0";
+			out_last_name = "Derksen\0";
+		}
 		else
 				showName = false;
 		
