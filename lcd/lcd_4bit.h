@@ -2,7 +2,7 @@
  *
  * \brief     Low level driver for the 16x2 LCD
  * \file      lcd.h
- * \author    Hugo Arends
+ * \author    Hugo Arends, edit by JWI
  * \date      June 2021
  *
  * \copyright 2021 HAN University of Applied Sciences. All Rights Reserved.

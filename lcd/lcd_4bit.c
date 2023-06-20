@@ -2,7 +2,7 @@
  *
  * \brief     Low level driver for the 16x2 LCD
  * \file      lcd.c
- * \author    Hugo Arends
+ * \author    Hugo Arends, edit by JWI
  * \date      June 2021
  *
  * \copyright 2021 HAN University of Applied Sciences. All Rights Reserved.
@@ -47,13 +47,19 @@
 /// \}
 															
 															
-void backgroundLight_init(void)
+static void backgroundLight_init(void)
 {
-    SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+    // Enable clock for Port D
+	  SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
 	
+		// Pin config
+    // - MUX[2:0] = 001 : Alternative 1 (GPIO)
     PORTD->PCR[2] = 0b00100000000;
+	
+		// Set pin to output
     PTD->PDDR |= MASK(2);
 	
+		// Pin logic 1
 		PTD->PSOR = MASK(2);
 }
 															

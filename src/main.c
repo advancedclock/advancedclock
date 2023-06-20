@@ -79,7 +79,7 @@ int main(void)
 					initSystem();	
 				
 					lcd_clear();
-					lcd_printlines("Advanced clock","Starting...");
+					lcd_printlines("Advanced clock\0","Starting...\0");
 					
 					SendDebugMsg("System init complete\r\n");
 					systemFunction = PROCESS_PC_DATA;
@@ -104,9 +104,9 @@ int main(void)
 					{
 							prefMinute = dateTime.minute;
 						
-							lcd_printlines("Writing time","Please wait...");
+							lcd_printlines("Writing time\0","Please wait...\0");
 						
-							writeTime(dateTime.hour ,dateTime.minute);
+							//writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
 					break;
@@ -114,15 +114,18 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					char line1[16] = "12:34:56";
-					char line2[16] = "1 Mei 2023";
+					const char line1[16] = "12:34:56\0"; 		// Value for test
+					const char line2[16];// = "1 Mei 2023\0";	// Value for test				
 					
-					if (!showName(line1,line2))
+					if (!showName(&line1,&line2))
 					{
-							//line1 = getTimeAsString(line1);
+							//line1 =getTimeAsString(line1);
 							//line2 = getDateAsString(line2);
 					}		
-
+					
+					showName(&line1,&line2);
+					
+					
 					lcd_printlines(line1,line2);				
 					
 					
@@ -190,7 +193,7 @@ void initSystem(void)
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance_cm = 1000;//irReadDistance();
+		int distance_cm = 10;//irReadDistance();
 	
 		if(distance_cm = -1)
 		{
@@ -198,23 +201,23 @@ bool showName(char* out_first_name, char* out_last_name)
 		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
 		{
-			out_first_name = "Anthony\0";
-			out_last_name = "vd Veght\0";
+			strcpy(out_first_name,"Anthony");
+			strcpy(out_last_name,"vd Veght");
 		}
 		else if (distance_cm < DISTANCE_SECOND_NAME)
 		{		
-			out_first_name = "Jaap-Jan\0";
-			out_last_name = "Groenendijk\0";
+			strcpy(out_first_name,"Jaap-Jan");
+			strcpy(out_last_name,"Groenendijk");
 		}
 		else if (distance_cm < DISTANCE_THIRD_NAME)
 		{		
-			out_first_name = "Jeroen\0";
-			out_last_name = "Wijnands\0";
+			strcpy(out_first_name,"Jeroen");
+			strcpy(out_last_name,"Wijnands");
 		}
 		else if (distance_cm < DISTANCE_FOURTH_NAME)
 		{
-			out_first_name = "Koen\0";
-			out_last_name = "Derksen\0";
+			strcpy(out_first_name,"Koen");
+			strcpy(out_last_name,"Derksen");
 		}
 		else
 				showName = false;
