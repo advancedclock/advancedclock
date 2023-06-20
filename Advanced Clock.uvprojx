@@ -52,7 +52,7 @@
           <OutputName>Advanced_clock</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\obj\</ListingPath>
@@ -317,13 +317,13 @@
             <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>1</OneElfS>
+            <OneElfS>0</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>.\queue;.\uart0</IncludePath>
+              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -427,12 +427,105 @@
             <File>
               <FileName>pc_comm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\pc_comm.c</FilePath>
+              <FilePath>.\pc_comm\pc_comm.c</FilePath>
             </File>
             <File>
               <FileName>pc_comm.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\pc_comm.h</FilePath>
+              <FilePath>.\pc_comm\pc_comm.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Servos</GroupName>
+          <Files>
+            <File>
+              <FileName>servoControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\servos\servoControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>servoControl.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\servos\servoControl.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Librarys</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Datetime</GroupName>
+          <Files>
+            <File>
+              <FileName>datetime.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\datetime.c</FilePath>
+            </File>
+            <File>
+              <FileName>datetime.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\datetime.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Clock</GroupName>
+          <Files>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\clock.h</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\clock.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Delay</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\delay.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\delay.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Ledcontrol</GroupName>
+          <Files>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\led.h</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\led.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display</GroupName>
+          <Files>
+            <File>
+              <FileName>lcd_4bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\lcd\lcd_4bit.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_4bit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lcd\lcd_4bit.h</FilePath>
             </File>
           </Files>
         </Group>
