@@ -5,7 +5,7 @@
  * \author    
  * \date      May 2023
  *
- * \copyright 
+ * \copyright Jeroen Wijnands
  *****************************************************************************/
 #ifndef SERVO_CONTROL_H
 #define SERVO_CONTROL_H

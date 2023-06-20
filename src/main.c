@@ -41,6 +41,7 @@
 #include "led.h"
 #include "delay.h"
 #include "clock.h"
+#include "lcd_4bit.h"
 
 /********************************************************************/
 /*Function prototypes  	 																						*/
@@ -76,6 +77,10 @@ int main(void)
 				case INIT_SYSTEM:
 				{
 					initSystem();	
+				
+					lcd_clear();
+					lcd_printlines("Advanced clock","Starting...");
+					
 					SendDebugMsg("System init complete\r\n");
 					systemFunction = PROCESS_PC_DATA;
 					break;
@@ -93,12 +98,14 @@ int main(void)
 					systemFunction = WRITE_TIME;
 				}				
 				case WRITE_TIME:
-				{
-					//UpdateDisplay("Writing","time");
+				{					
 					GetDateTime(&dateTime);
 					if(dateTime.minute != prefMinute)
 					{
 							prefMinute = dateTime.minute;
+						
+							lcd_printlines("Writing time","Please wait...");
+						
 							writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
@@ -115,7 +122,8 @@ int main(void)
 							//getTimeAsString(line1);
 							//getDateAsString(line2);
 					}
-					//UpdateDisplay(line1,line2);
+					
+					lcd_printlines("12:34:56","1 mei 2023");
 					
 					systemFunction = CHECK_SYSTEM_TEMPERATURE;
 					break;
@@ -159,7 +167,11 @@ int main(void)
 }
 
 void initSystem(void)
-{
+{	
+		//LCD 
+		lcd_init();	
+
+	
 		//PC_COMM
 		pc_comm_init();  	
 	

@@ -11,6 +11,16 @@
 #ifndef PC_COMM_H
 #define PC_COMM_H
 
+
+/*! ***************************************************************************
+ *
+ * \brief     Pc communication module
+ * \file      pc_comm.h
+ * \author    
+ * \date      May 2023
+ *
+ * \copyright  Jeroen Wijnands
+ *****************************************************************************/
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>

@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs</IncludePath>
+              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -449,11 +449,6 @@
               <FileType>5</FileType>
               <FilePath>.\servos\servoControl.h</FilePath>
             </File>
-            <File>
-              <FileName>ServoConfig.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\servos\ServoConfig.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -516,6 +511,21 @@
               <FileName>led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\led.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Display</GroupName>
+          <Files>
+            <File>
+              <FileName>lcd_4bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\lcd\lcd_4bit.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_4bit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lcd\lcd_4bit.h</FilePath>
             </File>
           </Files>
         </Group>
