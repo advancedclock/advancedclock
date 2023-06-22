@@ -86,11 +86,14 @@ void timeSyncCheck(uint32_t * unixTimeSeconds)
 		}
 }
 
-char* getTimeAsString(uint32_t unixTimeSeconds)
+// Function for converting UnixTimeSeconds to a string HH:MM:SS
+void getTimeAsString(uint32_t unixTimeSeconds, char *timeString)
 {
 		// Preferred format: HH:MM:SS
 		// Init variables
-		char timeString[9];
+		char hourString[3];
+		char minuteString[3];
+		char secondString[3];
 	
 		// Send UnixTimeSeconds to datetime.c
 		RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
@@ -101,17 +104,26 @@ char* getTimeAsString(uint32_t unixTimeSeconds)
 		uint32_t second = unixTime.second;
 		
 		// Put variables in string using sprintf
-		sprintf(timeString, "%02d:%02d:%02d", hour, minute, second);
+		sprintf(hourString, "%02d", hour);
+		sprintf(minuteString, "%02d", minute);
+		sprintf(secondString, "%02d", second);
 		
-		// return a pointer to the string
-		return timeString;
+		// Merge strings
+		strcat(timeString, hourString);
+		strcat(timeString, ":");
+		strcat(timeString, minuteString);
+		strcat(timeString, ":");
+		strcat(timeString, secondString);
 }
 
-char* getDateAsString(uint32_t unixTimeSeconds)
+// Function for converting UnixTimeSeconds to a string
+void getDateAsString(uint32_t unixTimeSeconds, char *dateString)
 {
-		// Preferred format: DD/MM/YYYY
+		// Preferred format: DD-MM-YYYY
 		// Init variables
-		char dateString[9];
+		char dayString[3];
+		char monthString[3];
+		char yearString[5];
 	
 		// Send UnixTimeSeconds to datetime.c
 		RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
@@ -122,8 +134,14 @@ char* getDateAsString(uint32_t unixTimeSeconds)
 		uint32_t year = unixTime.year;
 		
 		// Put variables in string using sprintf
-		sprintf(dateString, "%02d/%02d/%02d", day, month, year);
-	
-		// convert datetime_t struct to string
-		return dateString;
+		sprintf(dayString, "%02d", day);
+		sprintf(monthString, "%02d", month);
+		sprintf(yearString, "%04d", year);
+		
+		// Merge strings
+		strcat(dateString, dayString);
+		strcat(dateString, "-");
+		strcat(dateString, monthString);
+		strcat(dateString, "-");
+		strcat(dateString, yearString);
 }
