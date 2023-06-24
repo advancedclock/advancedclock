@@ -8,11 +8,14 @@
 extern volatile uint32_t unixTimeSeconds;
 extern volatile datetime_t unixTime;
 extern volatile bool timeSyncFlag;
+extern volatile char dateString[11];
+extern volatile char timeString[9];
+
 
 // prototype here
-void PITInit(uint32_t PITfrequency);
-void timeSyncCheck(uint32_t * unixTimeSeconds);
-void getTimeAsString(uint32_t unixTimeSeconds, char *timeString);
-void getDateAsString(uint32_t unixTimeSeconds, char *dateString);
+void PITInit(void);
+void timeSyncCheck(volatile uint32_t * unixTimeSeconds);
+void getTimeAsString(uint32_t unixTimeSeconds, volatile char *timeString);
+void getDateAsString(uint32_t unixTimeSeconds, volatile char *dateString);
 
 #endif
