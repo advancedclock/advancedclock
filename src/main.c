@@ -194,7 +194,7 @@ void initSystem(void)
 		//LCD 
 		lcd_init();	
 		//distance sensor
-			irInit();
+		irInit();
 	
 		//PC_COMM
 		pc_comm_init();  	
@@ -215,9 +215,11 @@ void initSystem(void)
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance =0;
-//	irReadDistance();
-	
+		
+
+	int distance = irReadDistance(10);
+	  
+		
 		if(distance == -1)
 		{
 				SendErrorMsg("IR ERROR!\0");
@@ -245,6 +247,8 @@ bool showName(char* out_first_name, char* out_last_name)
 		else
 				showName = false;
 		
+		
+	
 		return showName;			
 }
 /********************************************************/

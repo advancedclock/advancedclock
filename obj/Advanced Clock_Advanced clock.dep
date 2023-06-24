@@ -1,6 +1,6 @@
 Dependencies for Project 'Advanced Clock', Target 'Advanced clock': (DO NOT MODIFY !)
 CompilerVersion: 6190000::V6.19::ARMCLANG
-F (.\src\main.c)(0x6496CDCC)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I "./Distance sensor" -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/koend/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/koend/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/main.o -MD)
+F (.\src\main.c)(0x6496DCB3)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I "./Distance sensor" -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/koend/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/koend/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/main.o -MD)
 I (C:\Users\koend\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 I (C:\Users\koend\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0plus.h)(0x626FAD4E)
@@ -23,7 +23,7 @@ I (src\clock.h)(0x6491CC0A)
 I (lcd\lcd_4bit.h)(0x6491CE45)
 I (Temperature\Temperature.h)(0x6496C1BE)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6388AB78)
-I (Distance sensor\Distance.h)(0x6496C1BE)
+I (Distance sensor\Distance.h)(0x6496DC2A)
 F (.\uart0\uart0.c)(0x6491CC0A)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I "./Distance sensor" -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/koend/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/koend/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/uart0.o -MD)
 I (uart0\uart0.h)(0x6491CC0A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
@@ -142,9 +142,9 @@ I (C:\Users\koend\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cms
 I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x647337F0)
 I (src\Delay.h)(0x6491CC0A)
 F (.\Temperature\Temperature.h)(0x6496C1BE)()
-F (.\Distance sensor\Distance.h)(0x6496C1BE)()
-F (.\Distance sensor\Distance.c)(0x6496C934)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I "./Distance sensor" -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/koend/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/koend/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/distance.o -MD)
-I (Distance sensor\Distance.h)(0x6496C1BE)
+F (.\Distance sensor\Distance.h)(0x6496DC2A)()
+F (.\Distance sensor\Distance.c)(0x6496DCB3)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I "./Distance sensor" -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/koend/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/koend/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/distance.o -MD)
+I (Distance sensor\Distance.h)(0x6496DC2A)
 I (C:\Users\koend\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 I (C:\Users\koend\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0plus.h)(0x626FAD4E)

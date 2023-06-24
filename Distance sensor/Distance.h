@@ -5,6 +5,6 @@
 #include "delay.h"
 //available functions
 void irInit() ;
-int irReadDistance();
+int irReadDistance(const uint8_t n);
 
 #endif DISTANCE_H

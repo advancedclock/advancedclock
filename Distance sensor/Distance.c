@@ -49,11 +49,11 @@ uint16_t ir_sample(void)
     return (0xFFFF - res);
 }
 
-int irReadDistance(const int n)
+int irReadDistance(const uint8_t n)
 {
-		int distance=0;
+		
 	
-	  int cumulative_difference = 0;
+	  int32_t cumulative_difference = 0;
     
     for(int i=0; i<n; i++)
     {        
@@ -71,7 +71,7 @@ int irReadDistance(const int n)
 		
     }
 
-    distance  = cumulative_difference / n;
+    uint16_t distance  = (uint16_t) (cumulative_difference / n);
 		
 		if(distance >3000)
 		{
@@ -87,7 +87,7 @@ int irReadDistance(const int n)
 		}
 		
 		
-	
+		
 
 		return distance;
 }
