@@ -30,6 +30,7 @@
  *
  *****************************************************************************/
 #include "irDistanceSensor.h"
+#include <math.h>
 
 /*!
  * \brief Initialises the IR proximity sensor
@@ -161,9 +162,28 @@ uint16_t ir_measure(const uint8_t n)
     return sizeof(uint16_t) - result;
 }
 
+// Function for converting raw sensor value to human readable integer
 int getDistanceCm()
 {
-	int distance = ir_measure(10);
+	// Typical plot line for a TCRT5000 is:
+	// y = 2000+59000 / ( 1 + 1000e^-x)
+	// This function uses the inverse of y.
 	
-	return distance;
+		// Get raw distance value from sensor
+		double value = (int)ir_measure(10);
+		double result = 0;
+		
+		// Check if value from distance sensor is sane.
+		// For TCRT5000 its between 2000 & 70000 (1 to 15 cm).
+    if (value > 2000 && value < 70000)
+    {
+        // result for function y = -ln((61000 - x)/(1000(-2000+x)))
+        result = -log((61000 - value) / (1000 * (-2000 + value)));
+        int result_int = (int)(result + 0.5); // add 0.5 to round up
+        return result_int;
+    }
+    else
+    {
+        return -1;
+    }
 }
