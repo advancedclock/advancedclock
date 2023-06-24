@@ -42,6 +42,8 @@
 #include "delay.h"
 #include "clock.h"
 #include "lcd_4bit.h"
+#include "Temperature.h"
+#include "irDistanceSensor.h"
 
 /********************************************************************/
 /*Function prototypes  	 																						*/
@@ -114,8 +116,25 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					const char line1[16] = "12:34:56\0"; 		// Value for test
-					const char line2[16];// = "1 Mei 2023\0";	// Value for test				
+					const char line1[16] = "Distance\0"; 		// Value for test
+					const char line2[16] = "\0";	// Value for test	
+					
+					int distance_cm = ir_measure(10);//irReadDistance();
+					
+					
+					sprintf(line2, "%d", distance_cm);
+					lcd_printlines(line1,line2);
+					
+					showName(&line1,&line2);
+					
+					systemFunction = UPDATE_DISPLAY;
+					break;
+					
+					///////////////////////////////////////////////////////////////////
+					
+					
+					//const char line1[16] = "12:34:56\0"; 		// Value for test
+					//const char line2[16] = "1 Mei 2023\0";	// Value for test				
 					
 					if (!showName(&line1,&line2))
 					{
@@ -134,8 +153,20 @@ int main(void)
 				}
 				case CHECK_SYSTEM_TEMPERATURE:
 				{
-					int temp = 0;//FLOAT_TO_INT(get_temp_C());
-					if(temp >= GetReferenceTemperature())
+					const char line1[16] = "Temperature";
+			    const char line2[16] = "";
+					
+					float fTemp  = get_temp_C();//get the float temperature from the sensor
+					
+					int iTemp = FLOAT_TO_INT(fTemp); 
+					int referenceTemp = GetReferenceTemperature();
+							
+					//Update display
+					sprintf(line2, "%.2f %cC", fTemp, (char)223);//print the float temperature in string 
+					lcd_printlines(line1,line2);						
+					
+					//Check actual temp exceeds reference temp
+					if(iTemp >= referenceTemp)
 					{
 						//setLEDStatus(true,false,false);//RED
 					}
@@ -145,8 +176,8 @@ int main(void)
 					}
 					
 					//Communicatie with pc app					
-					SendTemperatureActual(temp);
-					SendTemperatureReference(GetReferenceTemperature());
+					SendTemperatureActual(fTemp);
+					SendTemperatureReference(referenceTemp);
 					
 					systemFunction = PROCESS_PC_DATA;
 					break;
@@ -158,7 +189,6 @@ int main(void)
 				echoUnixTime();
 				echoReferenceTemp();
 				
-				SendTemperatureActual(25);
 				SendTemperatureReference(GetReferenceTemperature());
 				
 				if(GetUnixTime() > 0)
@@ -174,14 +204,19 @@ void initSystem(void)
 {	
 		//LCD 
 		lcd_init();	
-
 	
 		//PC_COMM
 		pc_comm_init();  	
 	
 		//SERVOS
 		servos_init();
-		
+	
+		//TEMPERATURE
+		temp_init();
+	
+		//IR DISTANCE SENSOR
+		ir_init();  
+	
 		// init RGB LED
 		//rgb_init();
 	
@@ -193,7 +228,10 @@ void initSystem(void)
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance_cm = 10;//irReadDistance();
+		int distance_cm = ir_measure(10);//irReadDistance();
+	
+		
+	
 	
 		if(distance_cm = -1)
 		{

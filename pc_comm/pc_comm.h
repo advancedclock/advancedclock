@@ -41,7 +41,7 @@
 void pc_comm_init(void);
 
 //SET
-void SendTemperatureActual(int);
+void SendTemperatureActual(float);
 void SendTemperatureReference(int);
 void SendTimeSynqState(bool synqed);
 void SendErrorMsg(char *);

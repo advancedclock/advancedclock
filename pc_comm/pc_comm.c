@@ -66,11 +66,11 @@ void processCommData(void)
 	
 }
 
-void SendTemperatureActual(int val)
+void SendTemperatureActual(float val)
 {
 	char msg[80];
 	char sVal[5];
-	sprintf(sVal, "%d", val);
+	sprintf(sVal, "%.2f", val);
 	
 	strcpy(msg, "ACT_TEMP:");
 	strcat(msg, sVal);

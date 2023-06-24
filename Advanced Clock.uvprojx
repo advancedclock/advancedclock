@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd</IncludePath>
+              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd;.\Temperature;.\distanceSensor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -407,21 +407,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Queue</GroupName>
-          <Files>
-            <File>
-              <FileName>queue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\queue\queue.c</FilePath>
-            </File>
-            <File>
-              <FileName>queue.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\queue\queue.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Pc_comm</GroupName>
           <Files>
             <File>
@@ -450,9 +435,6 @@
               <FilePath>.\servos\servoControl.h</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Librarys</GroupName>
         </Group>
         <Group>
           <GroupName>Datetime</GroupName>
@@ -526,6 +508,51 @@
               <FileName>lcd_4bit.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lcd\lcd_4bit.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Temperature</GroupName>
+          <Files>
+            <File>
+              <FileName>Temperature.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Temperature\Temperature.c</FilePath>
+            </File>
+            <File>
+              <FileName>Temperature.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Temperature\Temperature.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Queue</GroupName>
+          <Files>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\queue\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\queue\queue.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>DistanceSensor</GroupName>
+          <Files>
+            <File>
+              <FileName>irDistanceSensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\distanceSensor\irDistanceSensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>irDistanceSensor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\distanceSensor\irDistanceSensor.h</FilePath>
             </File>
           </Files>
         </Group>
