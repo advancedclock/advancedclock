@@ -12,6 +12,7 @@
  */
 
 using System.IO.Ports;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -55,9 +56,9 @@ namespace WinFormsApp1
             tbDebugRx.Clear();
             tbDebugTx.Clear();
         }
-        private void buttonSync_Click(object sender, EventArgs e)
+        private async void buttonSync_Click(object sender, EventArgs e)
         {
-            getUnixTimestamp();
+            await getUnixTimestamp();
             syncUnixDtWithClock();
         }
 
@@ -147,7 +148,7 @@ namespace WinFormsApp1
                 MessageBox.Show($"Error sending com data: {err.Message}", "Send error",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         private void comPortDisposed(object? sender, EventArgs e)
         {
@@ -259,23 +260,29 @@ namespace WinFormsApp1
         #endregion
 
         #region Unix time stamp
-        private async void getUnixTimestamp()
+        private async Task getUnixTimestamp()
         {
-            HttpClient client = new HttpClient();
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.BaseAddress = new Uri("http://worldtimeapi.org/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("api/timezone/Europe/Amsterdam").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var readFromJsonAsync = response.Content.ReadAsStringAsync().Result;
-                unixDt = JsonSerializer.Deserialize<UnixDt>(readFromJsonAsync);
-                unixDt.unixtime = unixDt.unixtime + unixDt.dst_offset + unixDt.raw_offset; //timezone
-                   
+                using (HttpResponseMessage response = await client.GetAsync(new Uri("http://worldtimeapi.org/api/timezone/Europe/Amsterdam")))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+
+                        var readFromJsonAsync = content.ReadAsStringAsync().Result;
+                        unixDt = JsonSerializer.Deserialize<UnixDt>(readFromJsonAsync);
+                        unixDt.unixtime = unixDt.unixtime + unixDt.dst_offset + unixDt.raw_offset; //timezone
+
+                    }
+
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Error Code" + response.StatusCode + " : Message - " + response.ReasonPhrase);
+                MessageBox.Show("getUnixTimestamp failed");
             }
         }
         private void syncUnixDtWithClock()
@@ -312,24 +319,10 @@ namespace WinFormsApp1
         private void Program_Closing(object sender, FormClosingEventArgs e)
         {
             if (_serialPort != null)
-            { 
+            {
                 _serialPort.Dispose();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            comPortSendData("r");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            comPortSendData("g");
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            comPortSendData("b");
-        }
     }
 }
