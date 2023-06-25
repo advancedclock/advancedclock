@@ -133,7 +133,7 @@ void ProcessedNewUnixTime(bool){
 	SendTimeSynqState(true);
 }
 	
-void GetDateTime(datetime_t * datetime)
+void GetDateTimeOld(datetime_t * datetime)
 {
 	datetime->year = pcDateTime.year;
 	datetime->month = pcDateTime.month;

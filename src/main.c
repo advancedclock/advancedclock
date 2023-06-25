@@ -63,12 +63,14 @@ void rgb_onoff(const bool r, const bool g, const bool b);
 static bool moveServo = false;
 static bool showName(char* out_first_name, char* out_last_name);
 
+
 /********************************************************************/
 /*Varianble definition	 																						*/
 /********************************************************************/
 datetime_t dateTime;
 int prefMinute = 99;
 int systemFunction = INIT_SYSTEM;
+
 
 /********************************************************************/
 /*Functions							 																						*/
@@ -96,8 +98,7 @@ int main(void)
 					
 					if (newUnixTimeAvailable())
 					{
-						setUnixTime(GetUnixTime()); //to test
-						
+						SetUnixTimeClock(GetUnixTime());						
 						ProcessedNewUnixTime(true);
 						SendTimeSynqState(true);	
 					
@@ -107,6 +108,7 @@ int main(void)
 				case WRITE_TIME:
 				{					
 					GetDateTime(&dateTime);
+					
 					if(dateTime.minute != prefMinute)
 					{
 							prefMinute = dateTime.minute;
@@ -122,19 +124,24 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-         	const char line1[16] = "";
-					const char line2[16] = "";			
+					char line1[16] = "";	
+					char line2[16] = "";	
 					
-					if (!showName(line1,line2))
+					if (!showName(line1,line2))//If distancesensor not detecting distance for printing name
 					{						
-						//ToDo get date time
 						float fTemp  = get_temp_C();//get the float temperature from the sensor
 						
-						sprintf(line1,"12:34:56  %.1f%cC\0",fTemp, (char)223);
-						sprintf(line2,"1 Mei 2023\0");							
+						char strTime[8] = "";
+						GetTimeAsString(&strTime);
+						
+						char strDate[16] = "";
+						GetDateAsString(&strDate);
+												
+						sprintf(line1,"%s  %.1f%cC\0",strTime ,fTemp, (char)223);
+						sprintf(line2,"%s\0", strDate);															
 					}		
-					
-					lcd_printlines(line1,line2);			
+
+					lcd_printlines(line1,line2);				
 										
 					systemFunction = CHECK_SYSTEM_TEMPERATURE;
 					break;
@@ -156,7 +163,9 @@ int main(void)
 						setLEDStatus(false,true,false);//GREEN
 					}
 					
-					//Communicatie with pc app					
+					//Communicatie with pc app
+
+//check for change!!					
 					SendTemperatureActual(fTemp);
 					SendTemperatureReference(referenceTemp);
 					
@@ -164,8 +173,6 @@ int main(void)
 					break;
 				}
 			}
-			
-			delay_us(500000); // 1 sec	Wat hiermee doen?	
     }
 }
 
@@ -211,23 +218,23 @@ bool showName(char* out_first_name, char* out_last_name)
 		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
 		{
-				sprintf(out_first_name,"Anthony");
-				sprintf(out_last_name,"vd Veght");
+				sprintf(out_first_name,"Anthony\0");
+				sprintf(out_last_name,"vd Veght\0");
 		}
 		else if (distance_cm < DISTANCE_SECOND_NAME)
 		{		
-				sprintf(out_first_name,"Jaap-Jan");
-				sprintf(out_last_name,"Groenendijk");
+				sprintf(out_first_name,"Jaap-Jan\0");
+				sprintf(out_last_name,"Groenendijk\0");
 		}
 		else if (distance_cm < DISTANCE_THIRD_NAME)
 		{		
-				sprintf(out_first_name,"Jeroen");
-				sprintf(out_last_name,"Wijnands");
+				sprintf(out_first_name,"Jeroen\0");
+				sprintf(out_last_name,"Wijnands\0");
 		}
 		else if (distance_cm < DISTANCE_FOURTH_NAME)
 		{
-				sprintf(out_first_name,"Koen");
-				sprintf(out_last_name,"Derksen");
+				sprintf(out_first_name,"Koen\0");
+				sprintf(out_last_name,"Derksen\0");
 		}
 		else
 				showName = false;

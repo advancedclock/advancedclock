@@ -71,7 +71,7 @@ void PIT_IRQHandler(void)
 }
 
 // Check if time is in sync by comparing current time with a known recent timestamp
-void timeSyncCheck(volatile uint32_t * unixTimeSeconds)
+void TimeSyncCheck(volatile uint32_t * unixTimeSeconds)
 {
 		if (*unixTimeSeconds < RECENTUNIXTIME)
 		{
@@ -85,7 +85,7 @@ void timeSyncCheck(volatile uint32_t * unixTimeSeconds)
 }
 
 // Function for converting UnixTimeSeconds to a string HH:MM:SS
-void getTimeAsString(uint32_t unixTimeSeconds, volatile char *timeString)
+void GetTimeAsString(volatile char *timeString)
 {
 		// Init variables
 		char hourString[3];
@@ -117,7 +117,7 @@ void getTimeAsString(uint32_t unixTimeSeconds, volatile char *timeString)
 }
 
 // Function for converting UnixTimeSeconds to a string DD-MM-YYYY
-void getDateAsString(uint32_t _unixTimeSeconds, volatile char *dateString)
+void GetDateAsString(volatile char *dateString)
 {
 		// Init variables
 		char dayString[3];
@@ -148,9 +148,20 @@ void getDateAsString(uint32_t _unixTimeSeconds, volatile char *dateString)
 		strcat(dateString, yearString);
 }
 
-void setUnixTime(uint32_t val)
+void SetUnixTimeClock(uint32_t val)
 {
 	unixTimeSeconds = val;
+	RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+}
+
+void GetDateTime(datetime_t * datetime)
+{
+	datetime->year = unixTime.year;
+	datetime->month = unixTime.month;
+	datetime->day = unixTime.day;
+	datetime->hour = unixTime.hour;
+	datetime->minute = unixTime.minute;
+	datetime->second = unixTime.second;
 }
 
 

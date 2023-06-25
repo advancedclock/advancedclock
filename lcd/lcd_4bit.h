@@ -120,5 +120,6 @@ void lcd_print(const char *string);
 //JWI added
 void backgroundLight(bool);
 void lcd_printlines(const char *ln1 ,const char *ln2);
+bool isNotEqual(char* str1, char* str2);
 
 #endif // LCD_H
