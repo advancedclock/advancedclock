@@ -5,36 +5,42 @@
 //PTB19 = GREEN LED
 //PTD1  = BLUE LED	
 
-inline void setLEDStatus(const bool r, const bool g, const bool b)
+// Function to set the status of the red LED
+void setRedLED(const bool status)
 {
-	// Set the red led
-	if (r)
+	if (status)
 	{
-		PTB->PCOR |= (1 << 18);
+		PTB->PCOR |= (1 << 18);  // Set red LED
 	}
 	else
 	{
-		PTB->PSOR |= (1 << 18);
+		PTB->PSOR |= (1 << 18);  // Clear red LED
 	}
-	
-	// Set the green led
-	if (g)
+}
+
+// Function to set the status of the green LED
+void setGreenLED(const bool status)
+{
+	if (status)
 	{
-		PTB->PCOR |= (1 << 19);
-	}
-	else
-	{
-		PTB->PSOR |= (1 << 19);
-	}
-	
-	// Set the blue led
-	if (b)
-	{
-		PTD->PCOR |= (1 << 1);
+		PTB->PCOR |= (1 << 19);  // Set green LED
 	}
 	else
 	{
-		PTD->PSOR |= (1 << 1);
+		PTB->PSOR |= (1 << 19);  // Clear green LED
+	}
+}
+
+// Function to set the status of the blue LED
+void setBlueLED(const bool status)
+{
+	if (status)
+	{
+		PTD->PCOR |= (1 << 1);  // Set the blue LED
+	}
+	else
+	{
+		PTD->PSOR |= (1 << 1);  // Clear the blue LED
 	}
 }
 
@@ -60,5 +66,7 @@ void rgb_init(void)
 	PTD->PDDR |= (1 << 1);
 	
   // Set initial values: all LEDs off
-  setLEDStatus(false, false, false);
+	setRedLED(false);
+	setGreenLED(false);
+  setBlueLED(false);
 }

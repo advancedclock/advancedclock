@@ -77,7 +77,7 @@ int main(void)
 				case INIT_SYSTEM:
 				{
 					initSystem();	
-				
+					
 					lcd_clear();
 					lcd_printlines("Advanced clock\0","Starting...\0");
 					
@@ -172,6 +172,12 @@ int main(void)
 
 void initSystem(void)
 {	
+		// init RGB LED
+		rgb_init();
+	
+		// Give PITInit a frequency in Hz for IRQ
+		PITInit();
+	
 		//LCD 
 		lcd_init();	
 
@@ -182,11 +188,7 @@ void initSystem(void)
 		//SERVOS
 		servos_init();
 		
-		// init RGB LED
-		//rgb_init();
-	
-		// Give PITInit a frequency in Hz for IRQ
-		//PITInit(10);
+
 }
 
 
