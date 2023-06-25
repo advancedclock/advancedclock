@@ -36,12 +36,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+
 #include "servoControl.h"
 #include "pc_comm.h"
 #include "led.h"
 #include "delay.h"
 #include "clock.h"
 #include "lcd_4bit.h"
+#include "Temperature.h"
+#include "Distance.h"
 
 /********************************************************************/
 /*Function prototypes  	 																						*/
@@ -134,8 +137,24 @@ int main(void)
 				}
 				case CHECK_SYSTEM_TEMPERATURE:
 				{
-					int temp = 0;//FLOAT_TO_INT(get_temp_C());
-					if(temp >= GetReferenceTemperature())
+					float Ftemp =0 ;	
+					Ftemp = get_temp_C();//get the float temperature from the sensor
+					int Itemp = FLOAT_TO_INT(Ftemp); //Itemp = the temperature from sensor converted to int 
+				  const char IstrTemp[10] = "";
+			    const char FstrTemp[10] = "";
+					
+					
+					//for testing with lcd
+					sprintf(IstrTemp, "I = %d", Itemp);//print the integer temperature string
+					sprintf(FstrTemp, "F = %F", Ftemp);//print the float temperature in string 
+					const char line1[16] ;		
+					const char line2[16];
+					lcd_printlines(IstrTemp,FstrTemp);
+					// end for testing with lcd
+					
+					SendDebugMsg(IstrTemp);
+					
+					if(Itemp >= GetReferenceTemperature())
 					{
 						//setLEDStatus(true,false,false);//RED
 					}
@@ -145,7 +164,7 @@ int main(void)
 					}
 					
 					//Communicatie with pc app					
-					SendTemperatureActual(temp);
+					SendTemperatureActual(Itemp);
 					SendTemperatureReference(GetReferenceTemperature());
 					
 					systemFunction = PROCESS_PC_DATA;
@@ -174,7 +193,8 @@ void initSystem(void)
 {	
 		//LCD 
 		lcd_init();	
-
+		//distance sensor
+		irInit();
 	
 		//PC_COMM
 		pc_comm_init();  	
@@ -187,34 +207,39 @@ void initSystem(void)
 	
 		// Give PITInit a frequency in Hz for IRQ
 		//PITInit(10);
+	  // Initialize temperature sensor
+	  temp_init();
 }
 
 
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance_cm = 10;//irReadDistance();
-	
-		if(distance_cm = -1)
+		
+
+	int distance = irReadDistance(10);
+	  
+		
+		if(distance == -1)
 		{
 				SendErrorMsg("IR ERROR!\0");
 		}
-		else if (distance_cm < DISTANCE_FIRST_NAME)
+		else if (distance == 1)
 		{
 			strcpy(out_first_name,"Anthony");
 			strcpy(out_last_name,"vd Veght");
 		}
-		else if (distance_cm < DISTANCE_SECOND_NAME)
+		else if (distance  == 0)
 		{		
 			strcpy(out_first_name,"Jaap-Jan");
 			strcpy(out_last_name,"Groenendijk");
 		}
-		else if (distance_cm < DISTANCE_THIRD_NAME)
+		else if (distance == 3)
 		{		
 			strcpy(out_first_name,"Jeroen");
 			strcpy(out_last_name,"Wijnands");
 		}
-		else if (distance_cm < DISTANCE_FOURTH_NAME)
+		else if (distance == 2)
 		{
 			strcpy(out_first_name,"Koen");
 			strcpy(out_last_name,"Derksen");
@@ -222,6 +247,8 @@ bool showName(char* out_first_name, char* out_last_name)
 		else
 				showName = false;
 		
+		
+	
 		return showName;			
 }
 /********************************************************/
