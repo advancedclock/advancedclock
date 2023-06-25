@@ -4,7 +4,10 @@
 #include <MKL25Z4.h>
 #include <stdbool.h>
 
-void setLEDStatus(const bool r, const bool g, const bool b);
+void setRedLED(const bool status);
+void setGreenLED(const bool status);
+void setBlueLED(const bool status);
+
 void rgb_init(void);
 
 #endif
