@@ -115,10 +115,8 @@ void servos_init(void)
 
 static void setup(void)
 {
-    //setTime(19, 38);
-
     drawTo(75.2, 47);
-    lift(0);
+    lift(1);
 }
 
 void callibrate(void)
@@ -179,14 +177,15 @@ void number(float bx, float by, int num, float scale) {
         bogenGZS(bx + 7 * scale, by + 10 * scale, 10 * scale, -0.8, 6.7, 0.5);
         lift(1);
         break;
+		
     case 1:
-
         drawTo(bx + 3 * scale, by + 15 * scale);
         lift(0);
         drawTo(bx + 10 * scale, by + 20 * scale);
         drawTo(bx + 10 * scale, by + 0 * scale);
         lift(1);
         break;
+		
     case 2:
         drawTo(bx + 2 * scale, by + 12 * scale);
         lift(0);
@@ -195,6 +194,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 0 * scale);
         lift(1);
         break;
+		
     case 3:
         drawTo(bx + 2 * scale, by + 17 * scale);
         lift(0);
@@ -202,6 +202,7 @@ void number(float bx, float by, int num, float scale) {
         bogenUZS(bx + 5 * scale, by + 5 * scale, 5 * scale, 1.57, -3, 1);
         lift(1);
         break;
+		
     case 4:
         drawTo(bx + 10 * scale, by + 0 * scale);
         lift(0);
@@ -210,6 +211,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 6 * scale);
         lift(1);
         break;
+		
     case 5:
         drawTo(bx + 2 * scale, by + 5 * scale);
         lift(0);
@@ -218,6 +220,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 20 * scale);
         lift(1);
         break;
+		
     case 6:
         drawTo(bx + 2 * scale, by + 10 * scale);
         lift(0);
@@ -225,6 +228,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 11 * scale, by + 20 * scale);
         lift(1);
         break;
+		
     case 7:
         drawTo(bx + 2 * scale, by + 20 * scale);
         lift(0);
@@ -232,6 +236,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 2 * scale, by + 0);
         lift(1);
         break;
+		
     case 8:
         drawTo(bx + 5 * scale, by + 10 * scale);
         lift(0);
@@ -249,7 +254,6 @@ void number(float bx, float by, int num, float scale) {
         break;
 
     case 111:
-
         lift(0);//0;
         drawTo(70, 46);
         drawTo(65, 43);

@@ -31,6 +31,9 @@
 #define DISTANCE_THIRD_NAME 10 
 #define DISTANCE_FOURTH_NAME 13
 
+//Reference temp init
+#define INIT_REF_TEMP 30
+
 //includes 
 #include <MKL25Z4.h>
 #include <stdbool.h>
@@ -93,9 +96,11 @@ int main(void)
 					
 					if (newUnixTimeAvailable())
 					{
-						//setTime(); todo
+						setUnixTime(GetUnixTime()); //to test
+						
 						ProcessedNewUnixTime(true);
-						SendTimeSynqState(true);						
+						SendTimeSynqState(true);	
+					
 					}
 					systemFunction = WRITE_TIME;
 				}				
@@ -108,6 +113,7 @@ int main(void)
 						
 							lcd_printlines("Writing time\0","Please wait...\0");
 						
+							//ToDo
 							//writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
@@ -116,63 +122,38 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					/*const char line1[16] = "Distance\0"; 		// Value for test
-					const char line2[16] = "\0";	// Value for test	
-					
-					int distance_cm = getDistanceCm();//irReadDistance();
-					
-					
-					sprintf(line2, "%d", distance_cm);
-					lcd_printlines(line1,line2);
-					
-					showName(&line1,&line2);
-					
-					systemFunction = UPDATE_DISPLAY;
-					break;*/
-					
-					///////////////////////////////////////////////////////////////////
-					
-					
-					const char line1[16] = ""; 		// Value for test
-					const char line2[16] = "";	// Value for test				
+         	const char line1[16] = "";
+					const char line2[16] = "";			
 					
 					if (!showName(line1,line2))
-					{
-						sprintf(line1,"12:34:56\0");
-						sprintf(line1,"1 Mei 2023\0");							
+					{						
+						//ToDo get date time
+						float fTemp  = get_temp_C();//get the float temperature from the sensor
+						
+						sprintf(line1,"12:34:56  %.1f%cC\0",fTemp, (char)223);
+						sprintf(line2,"1 Mei 2023\0");							
 					}		
 					
-					SendDebugMsg(line1);
-					SendDebugMsg(line2);
-					
-					lcd_printlines(line1,line2);				
-					
-					
+					lcd_printlines(line1,line2);			
+										
 					systemFunction = CHECK_SYSTEM_TEMPERATURE;
 					break;
 				}
 				case CHECK_SYSTEM_TEMPERATURE:
-				{
-					const char line1[16] = "Temperature";
-			    const char line2[16] = "";
-					
+				{				
 					float fTemp  = get_temp_C();//get the float temperature from the sensor
 					
 					int iTemp = FLOAT_TO_INT(fTemp); 
-					int referenceTemp = GetReferenceTemperature();
-							
-					//Update display
-					sprintf(line2, "%.2f %cC", fTemp, (char)223);//print the float temperature in string 
-					lcd_printlines(line1,line2);						
+					int referenceTemp = GetReferenceTemperature();				
 					
 					//Check actual temp exceeds reference temp
 					if(iTemp >= referenceTemp)
 					{
-						//setLEDStatus(true,false,false);//RED
+						setLEDStatus(true,false,false);//RED
 					}
 					else
 					{
-						//setLEDStatus(false,true,false);//GREEN
+						setLEDStatus(false,true,false);//GREEN
 					}
 					
 					//Communicatie with pc app					
@@ -184,18 +165,6 @@ int main(void)
 				}
 			}
 			
-			
-			/*#ifdef DEBUG
-				echoUnixTime();
-				echoReferenceTemp();
-				
-				SendTemperatureReference(GetReferenceTemperature());
-				
-				if(GetUnixTime() > 0)
-					SendTimeSynqState(true);
-				else
-					SendTimeSynqState(false);
-			#endif*/
 			delay_us(500000); // 1 sec	Wat hiermee doen?	
     }
 }
@@ -213,15 +182,16 @@ void initSystem(void)
 	
 		//TEMPERATURE
 		temp_init();
+		SetReferenceTemperature(INIT_REF_TEMP);
 	
 		//IR DISTANCE SENSOR
 		ir_init();  
 	
 		// init RGB LED
-		//rgb_init();
+		rgb_init();
 	
 		// Give PITInit a frequency in Hz for IRQ
-		//PITInit(10);
+		PITInit();
 }
 
 

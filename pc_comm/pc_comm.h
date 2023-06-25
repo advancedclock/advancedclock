@@ -47,6 +47,8 @@ void SendTimeSynqState(bool synqed);
 void SendErrorMsg(char *);
 void SendDebugMsg(char *);
 void ProcessedNewUnixTime(bool);
+void SetReferenceTemperature(int);
+
 
 //GET
 void processCommData(void);

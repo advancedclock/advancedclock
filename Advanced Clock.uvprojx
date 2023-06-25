@@ -340,7 +340,7 @@
               <MiscControls>-Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement</MiscControls>
               <Define>CLOCK_SETUP=1</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd;.\Temperature;.\distanceSensor</IncludePath>
+              <IncludePath>./inc;.\src;.\queue;.\uart0;.\servos;.\pc_comm;.\libs;.\lcd;.\Temperature;.\distanceSensor;.\dateTime;.\led;.\clock</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -442,12 +442,12 @@
             <File>
               <FileName>datetime.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\datetime.c</FilePath>
+              <FilePath>.\dateTime\datetime.c</FilePath>
             </File>
             <File>
               <FileName>datetime.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\datetime.h</FilePath>
+              <FilePath>.\dateTime\datetime.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -455,14 +455,14 @@
           <GroupName>Clock</GroupName>
           <Files>
             <File>
-              <FileName>clock.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\clock.h</FilePath>
-            </File>
-            <File>
               <FileName>clock.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\clock.c</FilePath>
+              <FilePath>.\clock\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\clock\clock.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -485,14 +485,14 @@
           <GroupName>Ledcontrol</GroupName>
           <Files>
             <File>
-              <FileName>led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\led.h</FilePath>
-            </File>
-            <File>
               <FileName>led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\led.c</FilePath>
+              <FilePath>.\led\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\led\led.h</FilePath>
             </File>
           </Files>
         </Group>

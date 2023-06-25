@@ -143,6 +143,10 @@ void GetDateTime(datetime_t * datetime)
 	datetime->second = pcDateTime.second;
 }
 
+void SetReferenceTemperature(int value)
+{
+	RefTemp = value;
+}
 
 int GetReferenceTemperature(void)
 {
