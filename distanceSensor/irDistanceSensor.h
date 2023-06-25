@@ -37,5 +37,6 @@
 // Function prototypes
 void ir_init(void);
 uint16_t ir_measure(const uint8_t n);
+int getDistanceCm();
 
 #endif // IRDISTANCESENSOR_H

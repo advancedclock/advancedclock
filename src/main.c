@@ -26,10 +26,10 @@
 #define CHECK_SYSTEM_TEMPERATURE 5
 
 //Name distance config in cm
-#define DISTANCE_FIRST_NAME 10
-#define DISTANCE_SECOND_NAME 15
-#define DISTANCE_THIRD_NAME 20 
-#define DISTANCE_FOURTH_NAME 25
+#define DISTANCE_FIRST_NAME 4
+#define DISTANCE_SECOND_NAME 7
+#define DISTANCE_THIRD_NAME 10 
+#define DISTANCE_FOURTH_NAME 13
 
 //includes 
 #include <MKL25Z4.h>
@@ -116,10 +116,10 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					const char line1[16] = "Distance\0"; 		// Value for test
+					/*const char line1[16] = "Distance\0"; 		// Value for test
 					const char line2[16] = "\0";	// Value for test	
 					
-					int distance_cm = ir_measure(10);//irReadDistance();
+					int distance_cm = getDistanceCm();//irReadDistance();
 					
 					
 					sprintf(line2, "%d", distance_cm);
@@ -128,22 +128,22 @@ int main(void)
 					showName(&line1,&line2);
 					
 					systemFunction = UPDATE_DISPLAY;
-					break;
+					break;*/
 					
 					///////////////////////////////////////////////////////////////////
 					
 					
-					//const char line1[16] = "12:34:56\0"; 		// Value for test
-					//const char line2[16] = "1 Mei 2023\0";	// Value for test				
+					const char line1[16] = ""; 		// Value for test
+					const char line2[16] = "";	// Value for test				
 					
-					if (!showName(&line1,&line2))
+					if (!showName(line1,line2))
 					{
-							//line1 =getTimeAsString(line1);
-							//line2 = getDateAsString(line2);
+						sprintf(line1,"12:34:56\0");
+						sprintf(line1,"1 Mei 2023\0");							
 					}		
 					
-					showName(&line1,&line2);
-					
+					SendDebugMsg(line1);
+					SendDebugMsg(line2);
 					
 					lcd_printlines(line1,line2);				
 					
@@ -185,7 +185,7 @@ int main(void)
 			}
 			
 			
-			#ifdef DEBUG
+			/*#ifdef DEBUG
 				echoUnixTime();
 				echoReferenceTemp();
 				
@@ -195,8 +195,8 @@ int main(void)
 					SendTimeSynqState(true);
 				else
 					SendTimeSynqState(false);
-			#endif
-			delay_us(1000000); // 1 sec	Wat hiermee doen?	
+			#endif*/
+			delay_us(500000); // 1 sec	Wat hiermee doen?	
     }
 }
 
@@ -228,34 +228,36 @@ void initSystem(void)
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance_cm = ir_measure(10);//irReadDistance();
+		int distance_cm = getDistanceCm();
 	
-		
-	
-	
-		if(distance_cm = -1)
+		if(distance_cm == -1)
 		{
 				SendErrorMsg("IR ERROR!\0");
+				showName = false;
+		}
+		else if(distance_cm < 1)
+		{
+				showName = false;
 		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
 		{
-			strcpy(out_first_name,"Anthony");
-			strcpy(out_last_name,"vd Veght");
+				sprintf(out_first_name,"Anthony");
+				sprintf(out_last_name,"vd Veght");
 		}
 		else if (distance_cm < DISTANCE_SECOND_NAME)
 		{		
-			strcpy(out_first_name,"Jaap-Jan");
-			strcpy(out_last_name,"Groenendijk");
+				sprintf(out_first_name,"Jaap-Jan");
+				sprintf(out_last_name,"Groenendijk");
 		}
 		else if (distance_cm < DISTANCE_THIRD_NAME)
 		{		
-			strcpy(out_first_name,"Jeroen");
-			strcpy(out_last_name,"Wijnands");
+				sprintf(out_first_name,"Jeroen");
+				sprintf(out_last_name,"Wijnands");
 		}
 		else if (distance_cm < DISTANCE_FOURTH_NAME)
 		{
-			strcpy(out_first_name,"Koen");
-			strcpy(out_last_name,"Derksen");
+				sprintf(out_first_name,"Koen");
+				sprintf(out_last_name,"Derksen");
 		}
 		else
 				showName = false;
