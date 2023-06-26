@@ -66,6 +66,8 @@
 /*Define Constants																						      */  
 /********************************************************************/
 #define M_PI		3.14159265358979323846	/* pi */
+#define WRITE_DELAY 100//2000
+#define WIPE_DELAY 10//1000
 
 
 /********************************************************************/
@@ -84,6 +86,8 @@ static volatile double lastY = 47.5;
 static int last_min = 0;
 static int _hour = 0;
 static int _minute = 0;
+
+static int writeDelay = WRITE_DELAY; //HJigher is slower writing
 
 /********************************************************************/
 /*Function prototyping																							*/
@@ -254,6 +258,7 @@ void number(float bx, float by, int num, float scale) {
         break;
 
     case 111:
+				writeDelay = WIPE_DELAY;
         lift(0);//0;
         drawTo(70, 46);
         drawTo(65, 43);
@@ -279,6 +284,8 @@ void number(float bx, float by, int num, float scale) {
 
         drawTo(75.2, 47);
         lift(2);
+				
+				writeDelay = WRITE_DELAY;
 
         break;
 
@@ -420,7 +427,7 @@ double return_angle(double a, double b, double c) {
 void set_XY(double Tx, double Ty)
 {
     //delay(1);
-	  delayMicroseconds(2000);//slow down writing
+	  delayMicroseconds(writeDelay);//slow down writing
 	
     double dx, dy, c, a1, a2, Hx, Hy;
 

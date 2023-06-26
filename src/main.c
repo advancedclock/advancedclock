@@ -70,7 +70,8 @@ static bool showName(char* out_first_name, char* out_last_name);
 datetime_t dateTime;
 int prefMinute = 99;
 int systemFunction = INIT_SYSTEM;
-
+int referenceTempPrev = 0;
+float fTempPrev = 0.0;
 
 /********************************************************************/
 /*Functions							 																						*/
@@ -113,9 +114,9 @@ int main(void)
 					{
 							prefMinute = dateTime.minute;
 						
-							lcd_printlines("Writing time\0","Please wait...\0");
-						
-							//ToDo
+							SendDebugMsg("Writing time\r\n");						
+							lcd_printlines("Writing time\0","Please wait...\0");						
+							
 							//writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
@@ -127,7 +128,14 @@ int main(void)
 					char line1[16] = "";	
 					char line2[16] = "";	
 					
-					if (!showName(line1,line2))//If distancesensor not detecting distance for printing name
+					if (showName(line1,line2))//If distancesensor not detecting distance for printing name
+					{
+						char dbg[50] = "";
+						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);						
+											
+						SendDebugMsg(dbg);
+					}
+					else
 					{						
 						float fTemp  = get_temp_C();//get the float temperature from the sensor
 						
@@ -156,18 +164,29 @@ int main(void)
 					//Check actual temp exceeds reference temp
 					if(iTemp >= referenceTemp)
 					{
-						setLEDStatus(true,false,false);//RED
+						setRedLED(true);
+						setGreenLED(false);
+						
 					}
 					else
 					{
-						setLEDStatus(false,true,false);//GREEN
+						setRedLED(false);
+						setGreenLED(true);
 					}
 					
-					//Communicatie with pc app
-
-//check for change!!					
-					SendTemperatureActual(fTemp);
-					SendTemperatureReference(referenceTemp);
+					//Communicatie with pc app						
+					if ((fTemp != fTempPrev) || (referenceTemp != referenceTempPrev))//check for change	
+					{		
+							fTempPrev = fTemp;
+							referenceTempPrev = referenceTemp;
+							SendTemperatureActual(fTemp);
+							SendTemperatureReference(referenceTemp);
+						
+							if(iTemp >= referenceTemp)
+							{
+								SendDebugMsg("Temperature to high!\r\n");
+							}
+					}
 					
 					systemFunction = PROCESS_PC_DATA;
 					break;

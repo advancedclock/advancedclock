@@ -59,12 +59,12 @@ void PIT_IRQHandler(void)
 	// Toggle the LED every 1 second
 	if (count == 1)
 	{
-		setLEDStatus(false, false, false);
+		setBlueLED(false);
 	}
 
 	if (count == 10)
 	{
-		setLEDStatus(true, true, false);
+		setBlueLED(true);
 		count = 0;
 		unixTimeSeconds++;
 	}

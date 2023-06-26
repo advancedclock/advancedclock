@@ -9,10 +9,30 @@
  *
  *
  *****************************************************************************/
+ 
+/********************************************************************/
+/*Includes																													*/
+/********************************************************************/
 #include "pc_comm.h"
 
+
+/********************************************************************/
+/*Variable defenition																								*/
+/********************************************************************/
 datetime_t pcDateTime;
+
 bool _newUnixTimeAvailable = false;
+char prevDbgMsg[255] = "";
+
+/********************************************************************/
+/*Private function prototyping																			*/
+/********************************************************************/
+static void getValue(const char* , char* );
+static void getCommand(const char* , char* );
+static bool isNotEqual(char* str1, char* str2);
+static int UnixTime = 0;
+static int RefTemp = 0;
+
 
 void pc_comm_init(void)
 {
@@ -109,12 +129,16 @@ void SendErrorMsg(char* val)
 	
 void SendDebugMsg(char* str)
 {
-	char msg[255];
+	char msg[255];	
 	
 	strcat(msg, str);
 	strcat(msg, "|\r\n");	
 	
-	uart0_send_string(str);
+	if(isNotEqual(str,prevDbgMsg))	
+	{
+		sprintf(prevDbgMsg,str);
+		uart0_send_string(str);
+	}
 }
 
 signed int GetUnixTime(void)
@@ -178,3 +202,23 @@ static void getValue(const char* source, char* destination) {
         destination[0] = '\0';  // Empty string if the delimiters are not found or in the wrong order
     }
 }
+
+static bool isNotEqual(char* str1, char* str2)
+{
+	
+	bool nEq = false;
+	int i = 0;
+	
+	for(i=0; i<16; i++)
+	{		
+		if(str1[i] != str2[i])
+		{
+			nEq = true;
+			break;
+		}	
+	}
+	return nEq;
+}
+
+
+
