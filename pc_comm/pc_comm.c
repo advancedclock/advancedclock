@@ -1,6 +1,6 @@
 /*! ***************************************************************************
  *
- * \brief     pc communicatio module
+ * \brief     Implementation of the pc communication with uart
  * \file      pc_comm.c
  * \author    Jeroen Wijnands
  * \date      May 2023
@@ -220,5 +220,7 @@ static bool isNotEqual(char* str1, char* str2)
 	return nEq;
 }
 
-
+/********************************************************************/
+/*END																																*/
+/********************************************************************/
 

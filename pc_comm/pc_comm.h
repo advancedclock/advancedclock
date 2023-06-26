@@ -1,7 +1,7 @@
 /*! ***************************************************************************
  *
- * \brief     Implementatioon of a queue
- * \file      queue.h
+ * \brief     Implementation of the pc communication with uart
+ * \file      pc_comm.h
  * \author    Jeroen Wijnands
  * \date      May 2023
  *
@@ -32,15 +32,17 @@
 
 #define Q_SIZE (512)
 
-/*!
- * \brief Type definition of a queue
- */
  
 
-//CONSTRUCTOR
+/********************************************************************/
+/*INIT  																														*/
+/********************************************************************/
 void pc_comm_init(void);
 
-//SET
+
+/********************************************************************/
+/*SET FUNCTIONS																											*/
+/********************************************************************/
 void SendTemperatureActual(float);
 void SendTemperatureReference(int);
 void SendTimeSynqState(bool synqed);
@@ -50,12 +52,17 @@ void ProcessedNewUnixTime(bool);
 void SetReferenceTemperature(int);
 
 
-//GET
+/********************************************************************/
+/*GET FUNCTIONS																											*/
+/********************************************************************/
 void processCommData(void);
 signed int GetUnixTime(void);
 int GetReferenceTemperature(void);
 void GetDateTimeOld(datetime_t * datetime);
 bool newUnixTimeAvailable();
 
+/********************************************************************/
+/*END																																*/
+/********************************************************************/
 
 #endif // PC_COMM_H
