@@ -58,9 +58,6 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.btnSync = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tbDebugTx = new System.Windows.Forms.TextBox();
@@ -341,9 +338,6 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.button3);
-            this.groupBox5.Controls.Add(this.button2);
-            this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.tbDebugTx);
@@ -354,37 +348,7 @@
             this.groupBox5.Size = new System.Drawing.Size(773, 337);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Debug info";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(184, 309);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(103, 309);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(22, 309);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox5.Text = "Debug info";            
             // 
             // label10
             // 
@@ -489,8 +453,5 @@
         private Label label4;
         private Label lblUnix;
         private Label lblDate;
-        private Button button3;
-        private Button button2;
-        private Button button1;
     }
 }

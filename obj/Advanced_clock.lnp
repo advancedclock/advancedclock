@@ -1,7 +1,6 @@
 --cpu Cortex-M0+
 ".\obj\main.o"
 ".\obj\uart0.o"
-".\obj\queue.o"
 ".\obj\pc_comm.o"
 ".\obj\servocontrol.o"
 ".\obj\datetime.o"
@@ -9,9 +8,12 @@
 ".\obj\delay.o"
 ".\obj\led.o"
 ".\obj\lcd_4bit.o"
+".\obj\temperature.o"
+".\obj\queue.o"
+".\obj\irdistancesensor.o"
 ".\obj\startup_mkl25z4.o"
 ".\obj\system_mkl25z4.o"
---strict --scatter ".\obj\Advanced_clock.sct"
+--library_type=microlib --strict --scatter ".\obj\Advanced_clock.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\obj\Advanced_clock.map" -o .\obj\Advanced_clock.axf

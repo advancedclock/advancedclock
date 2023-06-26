@@ -66,6 +66,8 @@
 /*Define Constants																						      */  
 /********************************************************************/
 #define M_PI		3.14159265358979323846	/* pi */
+#define WRITE_DELAY 100//2000
+#define WIPE_DELAY 10//1000
 
 
 /********************************************************************/
@@ -84,6 +86,8 @@ static volatile double lastY = 47.5;
 static int last_min = 0;
 static int _hour = 0;
 static int _minute = 0;
+
+static int writeDelay = WRITE_DELAY; //HJigher is slower writing
 
 /********************************************************************/
 /*Function prototyping																							*/
@@ -115,10 +119,8 @@ void servos_init(void)
 
 static void setup(void)
 {
-    //setTime(19, 38);
-
     drawTo(75.2, 47);
-    lift(0);
+    lift(1);
 }
 
 void callibrate(void)
@@ -179,14 +181,15 @@ void number(float bx, float by, int num, float scale) {
         bogenGZS(bx + 7 * scale, by + 10 * scale, 10 * scale, -0.8, 6.7, 0.5);
         lift(1);
         break;
+		
     case 1:
-
         drawTo(bx + 3 * scale, by + 15 * scale);
         lift(0);
         drawTo(bx + 10 * scale, by + 20 * scale);
         drawTo(bx + 10 * scale, by + 0 * scale);
         lift(1);
         break;
+		
     case 2:
         drawTo(bx + 2 * scale, by + 12 * scale);
         lift(0);
@@ -195,6 +198,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 0 * scale);
         lift(1);
         break;
+		
     case 3:
         drawTo(bx + 2 * scale, by + 17 * scale);
         lift(0);
@@ -202,6 +206,7 @@ void number(float bx, float by, int num, float scale) {
         bogenUZS(bx + 5 * scale, by + 5 * scale, 5 * scale, 1.57, -3, 1);
         lift(1);
         break;
+		
     case 4:
         drawTo(bx + 10 * scale, by + 0 * scale);
         lift(0);
@@ -210,6 +215,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 6 * scale);
         lift(1);
         break;
+		
     case 5:
         drawTo(bx + 2 * scale, by + 5 * scale);
         lift(0);
@@ -218,6 +224,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 12 * scale, by + 20 * scale);
         lift(1);
         break;
+		
     case 6:
         drawTo(bx + 2 * scale, by + 10 * scale);
         lift(0);
@@ -225,6 +232,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 11 * scale, by + 20 * scale);
         lift(1);
         break;
+		
     case 7:
         drawTo(bx + 2 * scale, by + 20 * scale);
         lift(0);
@@ -232,6 +240,7 @@ void number(float bx, float by, int num, float scale) {
         drawTo(bx + 2 * scale, by + 0);
         lift(1);
         break;
+		
     case 8:
         drawTo(bx + 5 * scale, by + 10 * scale);
         lift(0);
@@ -249,7 +258,7 @@ void number(float bx, float by, int num, float scale) {
         break;
 
     case 111:
-
+				writeDelay = WIPE_DELAY;
         lift(0);//0;
         drawTo(70, 46);
         drawTo(65, 43);
@@ -275,6 +284,8 @@ void number(float bx, float by, int num, float scale) {
 
         drawTo(75.2, 47);
         lift(2);
+				
+				writeDelay = WRITE_DELAY;
 
         break;
 
@@ -416,7 +427,7 @@ double return_angle(double a, double b, double c) {
 void set_XY(double Tx, double Ty)
 {
     //delay(1);
-	  delayMicroseconds(2000);//slow down writing
+	  delayMicroseconds(writeDelay);//slow down writing
 	
     double dx, dy, c, a1, a2, Hx, Hy;
 

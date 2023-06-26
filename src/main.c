@@ -26,10 +26,13 @@
 #define CHECK_SYSTEM_TEMPERATURE 5
 
 //Name distance config in cm
-#define DISTANCE_FIRST_NAME 10
-#define DISTANCE_SECOND_NAME 15
-#define DISTANCE_THIRD_NAME 20 
-#define DISTANCE_FOURTH_NAME 25
+#define DISTANCE_FIRST_NAME 4
+#define DISTANCE_SECOND_NAME 7
+#define DISTANCE_THIRD_NAME 10 
+#define DISTANCE_FOURTH_NAME 13
+
+//Reference temp init
+#define INIT_REF_TEMP 30
 
 //includes 
 #include <MKL25Z4.h>
@@ -42,6 +45,8 @@
 #include "delay.h"
 #include "clock.h"
 #include "lcd_4bit.h"
+#include "Temperature.h"
+#include "irDistanceSensor.h"
 
 /********************************************************************/
 /*Function prototypes  	 																						*/
@@ -58,12 +63,15 @@ void rgb_onoff(const bool r, const bool g, const bool b);
 static bool moveServo = false;
 static bool showName(char* out_first_name, char* out_last_name);
 
+
 /********************************************************************/
 /*Varianble definition	 																						*/
 /********************************************************************/
 datetime_t dateTime;
 int prefMinute = 99;
 int systemFunction = INIT_SYSTEM;
+int referenceTempPrev = 0;
+float fTempPrev = 0.0;
 
 /********************************************************************/
 /*Functions							 																						*/
@@ -77,7 +85,7 @@ int main(void)
 				case INIT_SYSTEM:
 				{
 					initSystem();	
-					
+				
 					lcd_clear();
 					lcd_printlines("Advanced clock\0","Starting...\0");
 					
@@ -91,21 +99,24 @@ int main(void)
 					
 					if (newUnixTimeAvailable())
 					{
-						//setTime(); todo
+						SetUnixTimeClock(GetUnixTime());						
 						ProcessedNewUnixTime(true);
-						SendTimeSynqState(true);						
+						SendTimeSynqState(true);	
+					
 					}
 					systemFunction = WRITE_TIME;
 				}				
 				case WRITE_TIME:
 				{					
 					GetDateTime(&dateTime);
+					
 					if(dateTime.minute != prefMinute)
 					{
 							prefMinute = dateTime.minute;
 						
-							lcd_printlines("Writing time\0","Please wait...\0");
-						
+							SendDebugMsg("Writing time\r\n");						
+							lcd_printlines("Writing time\0","Please wait...\0");						
+							
 							//writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
@@ -114,112 +125,135 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					const char line1[16] = "12:34:56\0"; 		// Value for test
-					const char line2[16];// = "1 Mei 2023\0";	// Value for test				
+					char line1[16] = "";	
+					char line2[16] = "";	
 					
-					if (!showName(&line1,&line2))
+					if (showName(line1,line2))//If distancesensor not detecting distance for printing name
 					{
-							//line1 =getTimeAsString(line1);
-							//line2 = getDateAsString(line2);
+						char dbg[50] = "";
+						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);						
+											
+						SendDebugMsg(dbg);
+					}
+					else
+					{						
+						float fTemp  = get_temp_C();//get the float temperature from the sensor
+						
+						char strTime[8] = "";
+						GetTimeAsString(&strTime);
+						
+						char strDate[16] = "";
+						GetDateAsString(&strDate);
+												
+						sprintf(line1,"%s  %.1f%cC\0",strTime ,fTemp, (char)223);
+						sprintf(line2,"%s\0", strDate);															
 					}		
-					
-					showName(&line1,&line2);
-					
-					
+
 					lcd_printlines(line1,line2);				
-					
-					
+										
 					systemFunction = CHECK_SYSTEM_TEMPERATURE;
 					break;
 				}
 				case CHECK_SYSTEM_TEMPERATURE:
-				{
-					int temp = 0;//FLOAT_TO_INT(get_temp_C());
-					if(temp >= GetReferenceTemperature())
+				{				
+					float fTemp  = get_temp_C();//get the float temperature from the sensor
+					
+					int iTemp = FLOAT_TO_INT(fTemp); 
+					int referenceTemp = GetReferenceTemperature();				
+					
+					//Check actual temp exceeds reference temp
+					if(iTemp >= referenceTemp)
 					{
-						//setLEDStatus(true,false,false);//RED
+						setRedLED(true);
+						setGreenLED(false);
+						
 					}
 					else
 					{
-						//setLEDStatus(false,true,false);//GREEN
+						setRedLED(false);
+						setGreenLED(true);
 					}
 					
-					//Communicatie with pc app					
-					SendTemperatureActual(temp);
-					SendTemperatureReference(GetReferenceTemperature());
+					//Communicatie with pc app						
+					if ((fTemp != fTempPrev) || (referenceTemp != referenceTempPrev))//check for change	
+					{		
+							fTempPrev = fTemp;
+							referenceTempPrev = referenceTemp;
+							SendTemperatureActual(fTemp);
+							SendTemperatureReference(referenceTemp);
+						
+							if(iTemp >= referenceTemp)
+							{
+								SendDebugMsg("Temperature to high!\r\n");
+							}
+					}
 					
 					systemFunction = PROCESS_PC_DATA;
 					break;
 				}
 			}
-			
-			
-			#ifdef DEBUG
-				echoUnixTime();
-				echoReferenceTemp();
-				
-				SendTemperatureActual(25);
-				SendTemperatureReference(GetReferenceTemperature());
-				
-				if(GetUnixTime() > 0)
-					SendTimeSynqState(true);
-				else
-					SendTimeSynqState(false);
-			#endif
-			delay_us(1000000); // 1 sec	Wat hiermee doen?	
     }
 }
 
 void initSystem(void)
 {	
-		// init RGB LED
-		rgb_init();
-	
-		// Give PITInit a frequency in Hz for IRQ
-		PITInit();
-	
 		//LCD 
 		lcd_init();	
-
 	
 		//PC_COMM
 		pc_comm_init();  	
 	
 		//SERVOS
 		servos_init();
-		
-
+	
+		//TEMPERATURE
+		temp_init();
+		SetReferenceTemperature(INIT_REF_TEMP);
+	
+		//IR DISTANCE SENSOR
+		ir_init();  
+	
+		// init RGB LED
+		rgb_init();
+	
+		// Give PITInit a frequency in Hz for IRQ
+		PITInit();
 }
 
 
 bool showName(char* out_first_name, char* out_last_name)
 {
 		bool showName = true;
-		int distance_cm = 10;//irReadDistance();
+		int distance_cm = getDistanceCm();
 	
-		if(distance_cm = -1)
+		if(distance_cm == -1)
 		{
 				SendErrorMsg("IR ERROR!\0");
+				showName = false;
+		}
+		else if(distance_cm < 1)
+		{
+				showName = false;
 		}
 		else if (distance_cm < DISTANCE_FIRST_NAME)
 		{
-			strcpy(out_first_name,"Anthony");
-			strcpy(out_last_name,"vd Veght");
+				sprintf(out_first_name,"Anthony\0");
+				sprintf(out_last_name,"vd Veght\0");
 		}
 		else if (distance_cm < DISTANCE_SECOND_NAME)
 		{		
-			strcpy(out_first_name,"Jaap-Jan");
-			strcpy(out_last_name,"Groenendijk");
+				sprintf(out_first_name,"Jaap-Jan\0");
+				sprintf(out_last_name,"Groenendijk\0");
 		}
 		else if (distance_cm < DISTANCE_THIRD_NAME)
 		{		
-			strcpy(out_first_name,"Jeroen");
-			strcpy(out_last_name,"Wijnands");
+				sprintf(out_first_name,"Jeroen\0");
+				sprintf(out_last_name,"Wijnands\0");
 		}
 		else if (distance_cm < DISTANCE_FOURTH_NAME)
 		{
-			strcpy(out_first_name,"Koen");
-			strcpy(out_last_name,"Derksen");
+				sprintf(out_first_name,"Koen\0");
+				sprintf(out_last_name,"Derksen\0");
 		}
 		else
 				showName = false;

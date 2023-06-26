@@ -29,6 +29,9 @@
  *            OTHER DEALINGS IN THE SOFTWARE.
  *
  *****************************************************************************/
+#include <string.h>
+#include <stdio.h>
+
 #include "lcd_4bit.h"
 #include "delay.h"
 
@@ -46,6 +49,10 @@
 
 /// \}
 															
+char prevLn1[16] = "";
+char prevLn2[16] = "";	
+char line1[16] = "";
+char line2[16] = "";															
 															
 static void backgroundLight_init(void)
 {
@@ -355,12 +362,39 @@ void lcd_print(const char *string)
 }
 
 void lcd_printlines(const char *ln1 ,const char *ln2)
-{
+{		
+	sprintf(line1,ln1);
+	sprintf(line2,ln2);
+	
+	if(isNotEqual(line1,prevLn1) || isNotEqual(line2,prevLn2))
+	{
+		sprintf(prevLn1,line1);
+		sprintf(prevLn2,line2);		  
+	
 		lcd_clear();
 		lcd_set_cursor(0,0);
-		lcd_print(ln1);
+		lcd_print(line1);
 		lcd_set_cursor(0,1);
-		lcd_print(ln2);
+		lcd_print(line2);			
+	}	
+}
+
+
+bool isNotEqual(char* str1, char* str2)
+{
+	
+	bool nEq = false;
+	int i = 0;
+	
+	for(i=0; i<16; i++)
+	{		
+		if(str1[i] != str2[i])
+		{
+			nEq = true;
+			break;
+		}	
+	}
+	return nEq;
 }
 
 

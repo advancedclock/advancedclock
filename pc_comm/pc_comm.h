@@ -41,24 +41,21 @@
 void pc_comm_init(void);
 
 //SET
-void SendTemperatureActual(int);
+void SendTemperatureActual(float);
 void SendTemperatureReference(int);
 void SendTimeSynqState(bool synqed);
 void SendErrorMsg(char *);
 void SendDebugMsg(char *);
 void ProcessedNewUnixTime(bool);
+void SetReferenceTemperature(int);
+
 
 //GET
 void processCommData(void);
 signed int GetUnixTime(void);
 int GetReferenceTemperature(void);
-void GetDateTime(datetime_t * datetime);
+void GetDateTimeOld(datetime_t * datetime);
 bool newUnixTimeAvailable();
 
 
-//PRIVATE
-static void getValue(const char* , char* );
-static void getCommand(const char* , char* );
-static int UnixTime = 0;
-static int RefTemp = 0;
 #endif // PC_COMM_H
