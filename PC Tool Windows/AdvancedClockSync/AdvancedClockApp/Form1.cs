@@ -249,13 +249,20 @@ namespace WinFormsApp1
 
         string getDataValAsString(String data)
         {
-            if (data.Contains(':') & data.Contains('|'))
+            try
             {
-                int length = ((data.IndexOf('|') - data.IndexOf(':')) - 1);
-                return data.Substring(data.IndexOf(':') + 1, length);
+                if (data.Contains(':') & data.Contains('|'))
+                {
+                    int length = ((data.IndexOf('|') - data.IndexOf(':')) - 1);
+                    return data.Substring(data.IndexOf(':') + 1, length);
+                }
+                else
+                    return string.Empty;
             }
-            else
+            catch
+            {
                 return string.Empty;
+            }
         }
         #endregion
 
