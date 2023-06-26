@@ -117,7 +117,7 @@ int main(void)
 							SendDebugMsg("Writing time\r\n");						
 							lcd_printlines("Writing time\0","Please wait...\0");						
 							
-							//writeTime(dateTime.hour ,dateTime.minute);
+							writeTime(dateTime.hour ,dateTime.minute);
 					}
 					systemFunction = UPDATE_DISPLAY;
 					break;
@@ -128,7 +128,7 @@ int main(void)
 					char line1[16] = "";	
 					char line2[16] = "";	
 					
-					if (showName(line1,line2))//If distancesensor not detecting distance for printing name
+					if (showName(line1,line2))//If distancesensor  detecting distance for printing name
 					{
 						char dbg[50] = "";
 						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);						

@@ -1,8 +1,8 @@
 /*! ***************************************************************************
  *
  * \brief     Low level driver for the infrared proximity sensor
- * \file      ir.h
- * \author    Hugo Arends
+ * \file      irDistanceSensor.h
+ * \author    Hugo Arends, Jaap-Jan, Jeroen
  * \date      July 2021
  *
  * \copyright 2021 HAN University of Applied Sciences. All Rights Reserved.
