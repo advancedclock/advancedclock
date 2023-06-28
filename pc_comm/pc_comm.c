@@ -89,7 +89,7 @@ void SendTemperatureActual(float val)
 {
 	char msg[80] = "\0";
 	
-	sprintf(msg,"ACT_REF_TEMP:%.2f|\r\n",val);
+	sprintf(msg,"ACT_TEMP:%.2f|\r\n",val);
 
 	uart0_send_string(msg);
 }
