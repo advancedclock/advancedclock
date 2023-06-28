@@ -34,6 +34,10 @@
 //Reference temp init
 #define INIT_REF_TEMP 30
 
+//Time delays
+#define HOLD_TIME_SHOW_NAME 5 // 5sec
+
+
 //includes 
 #include <MKL25Z4.h>
 #include <stdbool.h>
@@ -60,6 +64,8 @@ void initSystem(void);
 void delay_us(uint32_t d);
 void rgb_init(void);
 void rgb_onoff(const bool r, const bool g, const bool b);
+void updateTimeSynqStateToPc();
+void checkTemperatureStatusAndUpdateToPc();
 static bool moveServo = false;
 static bool showName(char* out_first_name, char* out_last_name);
 
@@ -72,6 +78,9 @@ int prefMinute = 99;
 int systemFunction = INIT_SYSTEM;
 int referenceTempPrev = 0;
 float fTempPrev = 0.0;
+
+bool prevSynqState = false;
+
 
 /********************************************************************/
 /*Functions							 																						*/
@@ -94,16 +103,17 @@ int main(void)
 					break;
 				}
 				case PROCESS_PC_DATA:
-				{
+				{			
 					processCommData();
 					
 					if (newUnixTimeAvailable())
 					{
 						SetUnixTimeClock(GetUnixTime());						
-						ProcessedNewUnixTime(true);
-						SendTimeSynqState(true);	
+						ProcessedNewUnixTime(true);					
+					}					
 					
-					}
+					updateTimeSynqStateToPc();					
+					
 					systemFunction = WRITE_TIME;
 				}				
 				case WRITE_TIME:
@@ -127,12 +137,12 @@ int main(void)
 				{					
 					char line1[16] = "";	
 					char line2[16] = "";	
+
 					
 					if (showName(line1,line2))//If distancesensor  detecting distance for printing name
 					{
-						char dbg[50] = "";
-						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);						
-											
+						char dbg[50] = "";	
+						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);										
 						SendDebugMsg(dbg);
 					}
 					else
@@ -156,37 +166,7 @@ int main(void)
 				}
 				case CHECK_SYSTEM_TEMPERATURE:
 				{				
-					float fTemp  = get_temp_C();//get the float temperature from the sensor
-					
-					int iTemp = FLOAT_TO_INT(fTemp); 
-					int referenceTemp = GetReferenceTemperature();				
-					
-					//Check actual temp exceeds reference temp
-					if(iTemp >= referenceTemp)
-					{
-						setRedLED(true);
-						setGreenLED(false);
-						
-					}
-					else
-					{
-						setRedLED(false);
-						setGreenLED(true);
-					}
-					
-					//Communicatie with pc app						
-					if ((fTemp != fTempPrev) || (referenceTemp != referenceTempPrev))//check for change	
-					{		
-							fTempPrev = fTemp;
-							referenceTempPrev = referenceTemp;
-							SendTemperatureActual(fTemp);
-							SendTemperatureReference(referenceTemp);
-						
-							if(iTemp >= referenceTemp)
-							{
-								SendDebugMsg("Temperature to high!\r\n");
-							}
-					}
+					checkTemperatureStatusAndUpdateToPc();
 					
 					systemFunction = PROCESS_PC_DATA;
 					break;
@@ -198,10 +178,7 @@ int main(void)
 void initSystem(void)
 {	
 		//LCD 
-		lcd_init();	
-	
-		//PC_COMM
-		pc_comm_init();  	
+		lcd_init();			
 	
 		//SERVOS
 		servos_init();
@@ -211,15 +188,58 @@ void initSystem(void)
 		SetReferenceTemperature(INIT_REF_TEMP);
 	
 		//IR DISTANCE SENSOR
-		ir_init();  
+		ir_init(); 
 	
 		// init RGB LED
 		rgb_init();
 	
 		// Give PITInit a frequency in Hz for IRQ
 		PITInit();
+	
+		//PC_COMM
+		pc_comm_init(); 
+		SendDebugMsg("Init values\r\n");
+			updateTimeSynqStateToPc();
+			SendTemperatureActual(get_temp_C());
+			SendTemperatureReference( GetReferenceTemperature());	
+		SendDebugMsg("Init values done\r\n");
+		
 }
 
+
+void updateTimeSynqStateToPc()
+{
+		bool clockSynqed = ClockOutOfSynq(GetUnixTimeClock());					
+		if(prevSynqState != clockSynqed) 
+		{
+			prevSynqState = clockSynqed;
+			SendTimeSynqState(clockSynqed);
+		}					
+}	
+
+void checkTemperatureStatusAndUpdateToPc()
+{
+	float fTemp  = get_temp_C();//get the float temperature from the sensor
+	int referenceTemp = GetReferenceTemperature();
+	bool temperatureToHigh = 	FLOAT_TO_INT(fTemp) >= referenceTemp;				
+
+	setRedLED(temperatureToHigh);
+	setGreenLED(!temperatureToHigh);
+	
+	//Communicatie with pc app						
+	if ((fTemp != fTempPrev) || (referenceTemp != referenceTempPrev))//check for change	
+	{		
+			fTempPrev = fTemp;
+			referenceTempPrev = referenceTemp;
+			SendTemperatureActual(fTemp);
+			SendTemperatureReference(referenceTemp);
+		
+			if(temperatureToHigh)
+			{
+				SendDebugMsg("Temperature to high!\r\n");
+			}
+	}
+}
 
 bool showName(char* out_first_name, char* out_last_name)
 {

@@ -70,10 +70,9 @@ void processCommData(void)
 		else if (strlen(cmd) >0)
 		{
 			char msg[80];
-			strcpy(msg, "cmd:");
-			strcat(msg, cmd);
-			strcpy(msg, "val:");
-			strcat(msg, val);
+			
+			sprintf(msg,"cmd:%s val:%s\r\n",cmd,val);
+			
 			SendErrorMsg(msg);
 		}
 
@@ -88,51 +87,44 @@ void processCommData(void)
 
 void SendTemperatureActual(float val)
 {
-	char msg[80];
-	char sVal[5];
-	sprintf(sVal, "%.2f", val);
+	char msg[80] = "\0";
 	
-	strcpy(msg, "ACT_TEMP:");
-	strcat(msg, sVal);
-	strcat(msg, "|\r\n");	
+	sprintf(msg,"ACT_REF_TEMP:%.2f|\r\n",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendTemperatureReference(int val)
 {
-	char msg[80];
-	char sVal[5];
-	sprintf(sVal, "%d", val);
-	
-	strcpy(msg, "ACT_REF_TEMP:");
-	strcat(msg, sVal);
-	strcat(msg, "|\r\n");	
+	char msg[80] = "\0";
+
+	sprintf(msg,"ACT_REF_TEMP:%d|\r\n",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendTimeSynqState(bool synqed)
 {
-	synqed ? uart0_send_string("SYNC:1|\r\n"):uart0_send_string("SYNC:0|\r\n");
+	char msg[80] = "\0";
+	synqed ? strcpy(msg,"SYNC:1|\r\n"):strcpy(msg,"SYNC:0|\r\n");
+	
+	uart0_send_string(msg);
 }
 	
 void SendErrorMsg(char* val)
 {
 	char msg[80];
-	strcpy(msg, "ERROR:");
-	strcat(msg, val);
-	strcat(msg, "|\r\n");	
+
+	sprintf(msg,"ERROR:%s|\r\n",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendDebugMsg(char* str)
 {
-	char msg[255];	
+	char msg[255];
 	
-	strcat(msg, str);
-	strcat(msg, "|\r\n");	
+	sprintf(msg,"%s|\r\n",str);
 	
 	if(isNotEqual(str,prevDbgMsg))	
 	{

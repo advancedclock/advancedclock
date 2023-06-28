@@ -1,6 +1,6 @@
 Dependencies for Project 'Advanced Clock', Target 'Advanced clock': (DO NOT MODIFY !)
 CompilerVersion: 6190000::V6.19::ARMCLANG
-F (.\src\main.c)(0x6499890C)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/main.o -MD)
+F (.\src\main.c)(0x649C39DA)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/main.o -MD)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0plus.h)(0x626FAD4E)
@@ -19,8 +19,8 @@ I (uart0\uart0.h)(0x63BC6BBE)
 I (queue\queue.h)(0x60A0CD7C)
 I (led\led.h)(0x6499874C)
 I (src\delay.h)(0x6491AFB5)
-I (clock\clock.h)(0x6499874C)
-I (lcd\lcd_4bit.h)(0x6499874C)
+I (clock\clock.h)(0x649C22FF)
+I (lcd\lcd_4bit.h)(0x6499D728)
 I (Temperature\Temperature.h)(0x6499874C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6388AB78)
 I (distanceSensor\irDistanceSensor.h)(0x6499890C)
@@ -36,7 +36,7 @@ I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x645FDAD4)
 I (queue\queue.h)(0x60A0CD7C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6388AB78)
 F (.\uart0\uart0.h)(0x63BC6BBE)()
-F (.\pc_comm\pc_comm.c)(0x6499890C)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/pc_comm.o -MD)
+F (.\pc_comm\pc_comm.c)(0x649C3BC8)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/pc_comm.o -MD)
 I (pc_comm\pc_comm.h)(0x6499890C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6388AB78)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
@@ -53,7 +53,7 @@ I (C:\Users\jeroe\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cms
 I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x645FDAD4)
 I (queue\queue.h)(0x60A0CD7C)
 F (.\pc_comm\pc_comm.h)(0x6499890C)()
-F (.\servos\servoControl.c)(0x6499890C)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/servocontrol.o -MD)
+F (.\servos\servoControl.c)(0x6499D767)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/servocontrol.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x6388AB78)
 I (servos\servoControl.h)(0x6499890C)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
@@ -68,7 +68,7 @@ F (.\dateTime\datetime.c)(0x6499874C)(-xc -std=gnu11 --target=arm-arm-none-eabi 
 I (dateTime\datetime.h)(0x6499874C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 F (.\dateTime\datetime.h)(0x6499874C)()
-F (.\clock\clock.c)(0x6499874C)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/clock.o -MD)
+F (.\clock\clock.c)(0x649C3A02)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/clock.o -MD)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0plus.h)(0x626FAD4E)
@@ -80,10 +80,10 @@ I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6388AB78)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6388AB78)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x6388AB78)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6388AB78)
-I (clock\clock.h)(0x6499874C)
+I (clock\clock.h)(0x649C22FF)
 I (dateTime\datetime.h)(0x6499874C)
 I (led\led.h)(0x6499874C)
-F (.\clock\clock.h)(0x6499874C)()
+F (.\clock\clock.h)(0x649C22FF)()
 F (.\src\delay.h)(0x6491AFB5)()
 F (.\src\delay.c)(0x6491AFB5)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/delay.o -MD)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
@@ -105,10 +105,10 @@ I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x645FDAD4)
 I (led\led.h)(0x6499874C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6388AB78)
 F (.\led\led.h)(0x6499874C)()
-F (.\lcd\lcd_4bit.c)(0x6499D5D5)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/lcd_4bit.o -MD)
+F (.\lcd\lcd_4bit.c)(0x6499D735)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/lcd_4bit.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x6388AB78)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6388AB78)
-I (lcd\lcd_4bit.h)(0x6499874C)
+I (lcd\lcd_4bit.h)(0x6499D728)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x6388AB78)
 I (C:\Users\jeroe\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0plus.h)(0x626FAD4E)
@@ -118,7 +118,7 @@ I (C:\Users\jeroe\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cms
 I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x645FDAD4)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x6388AB78)
 I (src\delay.h)(0x6491AFB5)
-F (.\lcd\lcd_4bit.h)(0x6499874C)()
+F (.\lcd\lcd_4bit.h)(0x6499D728)()
 F (.\Temperature\Temperature.c)(0x6499874C)(-xc -std=gnu11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -fno-function-sections -w -I ./inc -I ./src -I ./queue -I ./uart0 -I ./servos -I ./pc_comm -I ./libs -I ./lcd -I ./Temperature -I ./distanceSensor -I ./dateTime -I ./led -I ./clock -Wno-gnu-binary-literal -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-declaration-after-statement-I./RTE/Device/MKL25Z128xxx4-I./RTE/_Advanced_clock-IC:/Users/jeroe/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/jeroe/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./obj/temperature.o -MD)
 I (Temperature\Temperature.h)(0x6499874C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6388AB78)
