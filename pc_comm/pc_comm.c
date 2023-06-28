@@ -15,6 +15,8 @@
 /********************************************************************/
 #include "pc_comm.h"
 
+//#define DEBUG
+
 
 /********************************************************************/
 /*Variable defenition																								*/
@@ -71,12 +73,13 @@ void processCommData(void)
 		{
 			char msg[80];
 			
-			sprintf(msg,"cmd:%s val:%s\r\n",cmd,val);
+			sprintf(msg,"Unknown cmd:%s val:%s\r\n\0",cmd,val);
 			
 			SendErrorMsg(msg);
 		}
-
-		SendDebugMsg(buff);
+		#ifdef DEBUG
+			SendDebugMsg(buff);
+		#endif
 	}
 	else
 	{
@@ -89,7 +92,7 @@ void SendTemperatureActual(float val)
 {
 	char msg[80] = "\0";
 	
-	sprintf(msg,"ACT_TEMP:%.2f|\r\n",val);
+	sprintf(msg,"ACT_TEMP:%.1f|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
@@ -98,7 +101,7 @@ void SendTemperatureReference(int val)
 {
 	char msg[80] = "\0";
 
-	sprintf(msg,"ACT_REF_TEMP:%d|\r\n",val);
+	sprintf(msg,"ACT_REF_TEMP:%d|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
@@ -106,7 +109,7 @@ void SendTemperatureReference(int val)
 void SendTimeSynqState(bool synqed)
 {
 	char msg[80] = "\0";
-	synqed ? strcpy(msg,"SYNC:1|\r\n"):strcpy(msg,"SYNC:0|\r\n");
+	synqed ? strcpy(msg,"SYNC:1|\r\n\0"):strcpy(msg,"SYNC:0|\r\n\0");
 	
 	uart0_send_string(msg);
 }
@@ -115,7 +118,7 @@ void SendErrorMsg(char* val)
 {
 	char msg[80];
 
-	sprintf(msg,"ERROR:%s|\r\n",val);
+	sprintf(msg,"ERROR:%s|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
@@ -124,12 +127,12 @@ void SendDebugMsg(char* str)
 {
 	char msg[255];
 	
-	sprintf(msg,"%s|\r\n",str);
+	sprintf(msg,"%s\r\n",str);
 	
 	if(isNotEqual(str,prevDbgMsg))	
 	{
-		sprintf(prevDbgMsg,str);
-		uart0_send_string(str);
+		sprintf(prevDbgMsg,msg);
+		uart0_send_string(msg);
 	}
 }
 
@@ -149,15 +152,6 @@ void ProcessedNewUnixTime(bool){
 	SendTimeSynqState(true);
 }
 	
-void GetDateTimeOld(datetime_t * datetime)
-{
-	datetime->year = pcDateTime.year;
-	datetime->month = pcDateTime.month;
-	datetime->day = pcDateTime.day;
-	datetime->hour = pcDateTime.hour;
-	datetime->minute = pcDateTime.minute;
-	datetime->second = pcDateTime.second;
-}
 
 void SetReferenceTemperature(int value)
 {

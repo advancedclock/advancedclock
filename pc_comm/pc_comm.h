@@ -58,7 +58,6 @@ void SetReferenceTemperature(int);
 void processCommData(void);
 signed int GetUnixTime(void);
 int GetReferenceTemperature(void);
-void GetDateTimeOld(datetime_t * datetime);
 bool newUnixTimeAvailable();
 
 /********************************************************************/

@@ -10,7 +10,7 @@
 #include "datetime.h"
 
 
-#define SECONDS_IN_A_DAY 30//86400
+#define SECONDS_IN_A_DAY 86400
 
 volatile uint32_t unixTimeSeconds = 0;
 volatile datetime_t unixTime = {0, 0, 0, 0, 0, 0};

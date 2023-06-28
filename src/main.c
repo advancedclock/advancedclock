@@ -12,7 +12,7 @@
  *Koen
  *****************************************************************************/
 //Uncomment for debugging
-#define DEBUG
+//#define DEBUG
 
 //Converter
 #define FLOAT_TO_INT(x) ((x)>=0?(int)((x)+0.5):(int)((x)-0.5))
@@ -36,7 +36,6 @@
 
 //Time delays
 #define HOLD_TIME_SHOW_NAME 5 // 5sec
-
 
 //includes 
 #include <MKL25Z4.h>
@@ -78,7 +77,6 @@ int prefMinute = 99;
 int systemFunction = INIT_SYSTEM;
 int referenceTempPrev = 0;
 float fTempPrev = 0.0;
-
 bool prevSynqState = false;
 
 
@@ -87,7 +85,7 @@ bool prevSynqState = false;
 /********************************************************************/
 int main(void)
 {
-    while(true)
+	  while(true)
     {						
 			switch(systemFunction)
 			{
@@ -98,7 +96,8 @@ int main(void)
 					lcd_clear();
 					lcd_printlines("Advanced clock\0","Starting...\0");
 					
-					SendDebugMsg("System init complete\r\n");
+					SendDebugMsg("Advanced clock starting.\0");
+					SendDebugMsg("System init complete.\0");
 					systemFunction = PROCESS_PC_DATA;
 					break;
 				}
@@ -124,7 +123,7 @@ int main(void)
 					{
 							prefMinute = dateTime.minute;
 						
-							SendDebugMsg("Writing time\r\n");						
+							SendDebugMsg("Writing time.\0");						
 							lcd_printlines("Writing time\0","Please wait...\0");						
 							
 							writeTime(dateTime.hour ,dateTime.minute);
@@ -135,28 +134,31 @@ int main(void)
 
 				case UPDATE_DISPLAY:
 				{					
-					char line1[16] = "";	
-					char line2[16] = "";	
-
+					char line1[16] = "\0";	
+					char line2[16] = "\0";	
 					
 					if (showName(line1,line2))//If distancesensor  detecting distance for printing name
 					{
 						char dbg[50] = "";	
-						sprintf(dbg,"Showing name: %s %s\r\n",line1,line2);										
+						sprintf(dbg,"Showing name: %s %s\0",line1,line2);										
 						SendDebugMsg(dbg);
 					}
 					else
 					{						
 						float fTemp  = get_temp_C();//get the float temperature from the sensor
 						
-						char strTime[8] = "";
-						GetTimeAsString(&strTime);
+						char cSync = '\0';
+						char strTime[8] = "\0";
+						char strDate[16] = "\0";
 						
-						char strDate[16] = "";
+						GetTimeAsString(&strTime);						
 						GetDateAsString(&strDate);
-												
+						
+						if(ClockOutOfSynq(GetUnixTimeClock()))
+							cSync = '!';
+						
 						sprintf(line1,"%s  %.1f%cC\0",strTime ,fTemp, (char)223);
-						sprintf(line2,"%s\0", strDate);															
+						sprintf(line2,"%s%c\0", strDate,cSync);															
 					}		
 
 					lcd_printlines(line1,line2);				
@@ -178,7 +180,7 @@ int main(void)
 void initSystem(void)
 {	
 		//LCD 
-		lcd_init();			
+		lcd_init();	
 	
 		//SERVOS
 		servos_init();
@@ -198,36 +200,38 @@ void initSystem(void)
 	
 		//PC_COMM
 		pc_comm_init(); 
-		SendDebugMsg("Init values\r\n");
+		SendDebugMsg("__Init values__\0");
 			updateTimeSynqStateToPc();
 			SendTemperatureActual(get_temp_C());
 			SendTemperatureReference( GetReferenceTemperature());	
-		SendDebugMsg("Init values done\r\n");
+		SendDebugMsg("__Init values done__\0");
 		
 }
 
 
 void updateTimeSynqStateToPc()
 {
-		bool clockSynqed = ClockOutOfSynq(GetUnixTimeClock());					
-		if(prevSynqState != clockSynqed) 
+		bool clockOutOfSynq = ClockOutOfSynq(GetUnixTimeClock()) ;					
+		if(prevSynqState != clockOutOfSynq) 
 		{
-			prevSynqState = clockSynqed;
-			SendTimeSynqState(clockSynqed);
+			prevSynqState = clockOutOfSynq;
+			SendTimeSynqState(!clockOutOfSynq);
 		}					
 }	
 
 void checkTemperatureStatusAndUpdateToPc()
 {
-	float fTemp  = get_temp_C();//get the float temperature from the sensor
 	int referenceTemp = GetReferenceTemperature();
-	bool temperatureToHigh = 	FLOAT_TO_INT(fTemp) >= referenceTemp;				
+	float fTemp  = get_temp_C();	
+	bool temperatureToHigh = 	FLOAT_TO_INT(fTemp) >= referenceTemp;			
+	bool actualTempChanged = ((fTemp != fTempPrev) && ((fTemp - fTempPrev >= 0.1) || (fTemp - fTempPrev <= -0.1)));//Check if change is bigger then .1 degree
+	
 
 	setRedLED(temperatureToHigh);
 	setGreenLED(!temperatureToHigh);
 	
 	//Communicatie with pc app						
-	if ((fTemp != fTempPrev) || (referenceTemp != referenceTempPrev))//check for change	
+	if (actualTempChanged || (referenceTemp != referenceTempPrev))//check for change	
 	{		
 			fTempPrev = fTemp;
 			referenceTempPrev = referenceTemp;
@@ -235,9 +239,7 @@ void checkTemperatureStatusAndUpdateToPc()
 			SendTemperatureReference(referenceTemp);
 		
 			if(temperatureToHigh)
-			{
-				SendDebugMsg("Temperature to high!\r\n");
-			}
+				SendDebugMsg("Temperature to high!\0");			
 	}
 }
 
@@ -287,7 +289,7 @@ bool showName(char* out_first_name, char* out_last_name)
 void echoUnixTime(void)
 {
 	char sVal[50];
-	sprintf(sVal, "UnixTime: %d\r\n", GetUnixTime());	
+	sprintf(sVal, "UnixTime: %d\0", GetUnixTime());	
 	
 	SendDebugMsg(sVal);
 }
@@ -295,7 +297,7 @@ void echoUnixTime(void)
 void echoReferenceTemp(void)
 {
 	char sVal[50];
-	sprintf(sVal, "Ref temp: %d\r\n", GetReferenceTemperature());	
+	sprintf(sVal, "Ref temp: %d\0", GetReferenceTemperature());	
 	
 	SendDebugMsg(sVal);
 }
