@@ -348,7 +348,7 @@
             this.groupBox5.Size = new System.Drawing.Size(773, 337);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Debug info";            
+            this.groupBox5.Text = "Debug info";
             // 
             // label10
             // 

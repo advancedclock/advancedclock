@@ -9,13 +9,16 @@
 #include "led.h"
 #include "datetime.h"
 
-#define RECENTUNIXTIME 1685449404		// Unix tijd voor 2023-05-30 12:23:24 (UTC)
+
+#define SECONDS_IN_A_DAY 86400
 
 volatile uint32_t unixTimeSeconds = 0;
 volatile datetime_t unixTime = {0, 0, 0, 0, 0, 0};
 volatile bool timeSyncFlag = false;
 volatile char dateString[11];
 volatile char timeString[9];
+
+int lastSynqedUnixTime = 0;
 
 // Function for initializing the PIT Timer
 void PITInit(void)
@@ -71,17 +74,9 @@ void PIT_IRQHandler(void)
 }
 
 // Check if time is in sync by comparing current time with a known recent timestamp
-void TimeSyncCheck(volatile uint32_t * unixTimeSeconds)
-{
-		if (*unixTimeSeconds < RECENTUNIXTIME)
-		{
-				timeSyncFlag = false;
-		}
-		
-		if (*unixTimeSeconds > RECENTUNIXTIME)
-		{
-				timeSyncFlag = true;
-		}
+bool ClockOutOfSynq(volatile uint32_t currentUnixTimeSeconds)
+{	
+	return (currentUnixTimeSeconds > (lastSynqedUnixTime + SECONDS_IN_A_DAY));		
 }
 
 // Function for converting UnixTimeSeconds to a string HH:MM:SS
@@ -151,7 +146,13 @@ void GetDateAsString(volatile char *dateString)
 void SetUnixTimeClock(uint32_t val)
 {
 	unixTimeSeconds = val;
+	lastSynqedUnixTime = val;
 	RTC_HAL_ConvertSecsToDatetime(&unixTimeSeconds, &unixTime);
+}
+
+uint32_t GetUnixTimeClock()
+{
+	return unixTimeSeconds;
 }
 
 void GetDateTime(datetime_t * datetime)

@@ -14,12 +14,14 @@ extern volatile char timeString[9];
 
 // prototype here
 void PITInit(void);
-void TimeSyncCheck(volatile uint32_t * unixTimeSeconds);
+bool ClockOutOfSynq(volatile uint32_t currentUnixTimeSeconds);
 void GetTimeAsString(volatile char *timeString);
 void GetDateAsString(volatile char *dateString);
 void GetDateTime(datetime_t * datetime);
 
 void SetUnixTimeClock(uint32_t val);
+
+uint32_t GetUnixTimeClock();
 
 
 #endif

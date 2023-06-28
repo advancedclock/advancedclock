@@ -15,6 +15,8 @@
 /********************************************************************/
 #include "pc_comm.h"
 
+//#define DEBUG
+
 
 /********************************************************************/
 /*Variable defenition																								*/
@@ -70,14 +72,14 @@ void processCommData(void)
 		else if (strlen(cmd) >0)
 		{
 			char msg[80];
-			strcpy(msg, "cmd:");
-			strcat(msg, cmd);
-			strcpy(msg, "val:");
-			strcat(msg, val);
+			
+			sprintf(msg,"Unknown cmd:%s val:%s\r\n\0",cmd,val);
+			
 			SendErrorMsg(msg);
 		}
-
-		SendDebugMsg(buff);
+		#ifdef DEBUG
+			SendDebugMsg(buff);
+		#endif
 	}
 	else
 	{
@@ -88,56 +90,49 @@ void processCommData(void)
 
 void SendTemperatureActual(float val)
 {
-	char msg[80];
-	char sVal[5];
-	sprintf(sVal, "%.2f", val);
+	char msg[80] = "\0";
 	
-	strcpy(msg, "ACT_TEMP:");
-	strcat(msg, sVal);
-	strcat(msg, "|\r\n");	
+	sprintf(msg,"ACT_TEMP:%.1f|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendTemperatureReference(int val)
 {
-	char msg[80];
-	char sVal[5];
-	sprintf(sVal, "%d", val);
-	
-	strcpy(msg, "ACT_REF_TEMP:");
-	strcat(msg, sVal);
-	strcat(msg, "|\r\n");	
+	char msg[80] = "\0";
+
+	sprintf(msg,"ACT_REF_TEMP:%d|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendTimeSynqState(bool synqed)
 {
-	synqed ? uart0_send_string("SYNC:1|\r\n"):uart0_send_string("SYNC:0|\r\n");
+	char msg[80] = "\0";
+	synqed ? strcpy(msg,"SYNC:1|\r\n\0"):strcpy(msg,"SYNC:0|\r\n\0");
+	
+	uart0_send_string(msg);
 }
 	
 void SendErrorMsg(char* val)
 {
 	char msg[80];
-	strcpy(msg, "ERROR:");
-	strcat(msg, val);
-	strcat(msg, "|\r\n");	
+
+	sprintf(msg,"ERROR:%s|\r\n\0",val);
 
 	uart0_send_string(msg);
 }
 	
 void SendDebugMsg(char* str)
 {
-	char msg[255];	
+	char msg[255];
 	
-	strcat(msg, str);
-	strcat(msg, "|\r\n");	
+	sprintf(msg,"%s\r\n",str);
 	
 	if(isNotEqual(str,prevDbgMsg))	
 	{
-		sprintf(prevDbgMsg,str);
-		uart0_send_string(str);
+		sprintf(prevDbgMsg,msg);
+		uart0_send_string(msg);
 	}
 }
 
@@ -157,15 +152,6 @@ void ProcessedNewUnixTime(bool){
 	SendTimeSynqState(true);
 }
 	
-void GetDateTimeOld(datetime_t * datetime)
-{
-	datetime->year = pcDateTime.year;
-	datetime->month = pcDateTime.month;
-	datetime->day = pcDateTime.day;
-	datetime->hour = pcDateTime.hour;
-	datetime->minute = pcDateTime.minute;
-	datetime->second = pcDateTime.second;
-}
 
 void SetReferenceTemperature(int value)
 {

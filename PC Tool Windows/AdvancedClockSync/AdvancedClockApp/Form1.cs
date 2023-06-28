@@ -31,6 +31,8 @@ namespace WinFormsApp1
             InitializeComponent();
             enableUserControl(false);
             loadComPorts();
+
+            this.FormClosed += MyClosedHandler;
         }
 
         #region Button events
@@ -310,7 +312,7 @@ namespace WinFormsApp1
                 lblUnix.Text = unixDt.unixtime.ToString();
             });
 
-            comPortSendData($"UNIX:{unixDt.unixtime}|");
+            comPortSendData($"UNIX:{unixDt.unixtime}|\r\n");
         }
         #endregion
 
@@ -331,5 +333,12 @@ namespace WinFormsApp1
             }
         }
 
+        protected void MyClosedHandler(object sender, EventArgs e)
+        {
+            if (_serialPort != null)
+            {
+                _serialPort.Dispose();
+            }
+        }
     }
 }
